@@ -7,5 +7,6 @@ pluginManagement {
     }
 }
 
-include("sun-openrndr")
 include("sun-core")
+include("sun-openrndr")
+include("sun-fastled")

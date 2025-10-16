@@ -1,66 +1,113 @@
-# OPENRNDR template project
+# Digital Sun
 
-A feature rich template for creating OPENRNDR programs based on [Gradle/Kts](https://en.wikipedia.org/wiki/Gradle).
+A multi-platform LED visualization system with noise-based shader algorithms.
 
-The template consists of a configuration for Gradle and two example OPENRNDR programs. The Gradle configuration should serve as the
-go-to starting point for writing OPENRNDR-based software.
+## Project Structure
 
-If you are looking at this from IntelliJ IDEA you can start by expanding the _project_ tab on the left. You will find a template program in `src/main/kotlin/TemplateProgram.kt` and a live-coding example in `src/main/kotlin/TemplateLiveProgram.kt`.
+This project is organized into three modules:
 
-You will find some [basic instructions](https://guide.openrndr.org/setUpYourFirstProgram.html) in the [OPENRNDR guide](https://guide.openrndr.org).
+### sun-core
+Pure Kotlin/Java logic with no platform-specific dependencies.
 
-## Gradle tasks
+**Contains:**
+- `core/data/` - Data structures (Pixel, Stage)
+- `core/shader/` - Shader algorithms and interfaces
+- `core/noise/` - Noise generation interfaces
 
- - `./gradlew run` runs `TemplateProgram.kt` (Use `gradlew.bat run` under Windows)
- - `./gradlew run -Popenrndr.application=MyProgramKt` runs `src/main/kotlin/myProgram.kt`
- - `./gradlew run -Popenrndr.application=foo.bar.MyProgramKt` runs `src/main/kotlin/foo/bar/myProgram.kt` (assuming `package foo.bar` is used in myProgram.kt)
- - `./gradlew shadowJar` creates an executable platform specific jar file with all dependencies. Run the resulting program by typing `java -jar build/libs/openrndr-template-1.0.0-all.jar` in a terminal from the project root. If your project contains multiple `main` methods, specify which one to run with `java -cp build/libs/openrndr-template-1.0.0-all.jar MyProgramKt`, where `MyProgramKt` can also be `foo.bar.MyProgramKt` if it's in the package `foo.bar`.
- - `./gradlew jpackageZip` creates a zip with a stand-alone executable for the current platform (requires Java 17 or newer). Run it like this: `cd build/jpackage/openrndr-application/ && bin/openrndr-application`.
- - `./gradlew dependencyUpydates` checks whether any dependencies have newer versions.
+**Dependencies:** Kotlin stdlib, Kotlinx serialization, coroutines
 
-## Tips and issues
+**Purpose:** Reusable algorithms that can be used by any rendering backend.
 
-See the [wiki](https://github.com/openrndr/openrndr-template/wiki)
+### sun-openrndr
+OPENRNDR visualization layer for desktop development and preview.
 
-## Cross builds
+**Contains:**
+- `openrndr/render/` - OPENRNDR-specific rendering
+- `openrndr/noise/` - OPENRNDR noise adapter
+- `openrndr/ui/` - GUI parameter controls
+- Main application entry point
 
-To create a runnable jar for a platform different from your current platform, use `./gradlew jar -PtargetPlatform=<platform>`, where `<platform>` is either `windows`, `macos`, `linux-x64`, or `linux-arm64`. 
+**Dependencies:** sun-core + OPENRNDR libraries
 
-## Updating OPENRNDR, ORX and other dependencies
+**Purpose:** Desktop application for developing and previewing shaders with a live GUI.
 
-The openrndr-template depends on various packages including the core [openrndr](https://github.com/openrndr/openrndr/) and the [orx](https://github.com/openrndr/orx/) extensions and
-provides the optional [orsl](https://github.com/openrndr/orsl/) shader helper modules.
-The version numbers of these dependencies are specified in your [libs.versions.toml](gradle/libs.versions.toml) file. 
-Learn more about this file in the [Gradle documentation](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) website.
+### sun-fastled
+FastLED/Raspberry Pi LED strip rendering backend.
 
-Newer versions bring useful features and bug fixes. The most recent versions are<br>
-![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr/openrndr-math-jvm?label=OPENRNDR&color=%23FFC0CB) 
-![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr.extra/orx-noise-jvm?label=ORX&color=%23FFC0CB)
-![Maven Central Version](https://img.shields.io/maven-central/v/org.openrndr.orsl/orsl-shader-generator-jvm?label=ORSL&color=%23FFC0CB).
+**Contains:**
+- `fastled/render/` - LED strip renderer
+- `fastled/serial/` - Serial communication with Arduino/FastLED
+- `fastled/noise/` - Pure Kotlin noise implementation
+- Main application entry point
 
-Switch to the [next-version branch](https://github.com/openrndr/openrndr-template/tree/next-version) or enter these versions manually in your toml file. 
-They can look like "0.4.3" or "0.4.3-alpha4". Use the complete string, as in:
+**Dependencies:** sun-core + jSerialComm
 
-    openrndr = "0.4.5-alpha5"
-         orx = "0.4.5-alpha5"
-        orsl = "0.4.5-alpha5"
+**Purpose:** Production LED strip rendering on Raspberry Pi hardware.
 
-You can add other dependencies needed by your project to your [build.gradle.kts](build.gradle.kts) file, inside the `dependencies { }` block. 
+## Building
 
-⚠️ Remember to reload the Gradle configuration after changing any dependencies.
+Build all modules:
+```bash
+./gradlew build
+```
 
-## Github Actions
+Build specific module:
+```bash
+./gradlew :sun-core:build
+./gradlew :sun-openrndr:build
+./gradlew :sun-fastled:build
+```
 
-This repository contains various Github Actions under `./github/workflows`:
+## Running
 
-- [build-on-commit.yaml](.github/workflows/build-on-commit.yaml) runs a basic build on every commit, 
-which can help detect issues in the source code.
+### OPENRNDR Desktop Application
+```bash
+./gradlew :sun-openrndr:run
+```
 
-- [publish-binaries.yaml](.github/workflows/publish-binaries.yaml) publishes binaries for Linux, Mac and Windows 
-any time a commit is tagged with a version number like `v1.*`. For example, we can create and push a tag with these git commands:
-    ```
-    git tag -a v1.0.0 -m "v1.0.0"
-    git push origin v1.0.0
-    ```
+### FastLED Application (Raspberry Pi)
+```bash
+./gradlew :sun-fastled:run
+```
 
-    You can follow the progress of the action under the Actions tab in GitHub. Once complete, the executables will appear under the Releases section.
+Or create a standalone jar:
+```bash
+./gradlew :sun-fastled:shadowJar
+java -jar sun-fastled/build/libs/sun-fastled-1.0.0-all.jar
+```
+
+## Module Dependencies
+
+```
+        ┌─────────────────────────┐
+        │   sun-fastled           │
+        │  (FastLED rendering)    │
+        │                         │
+        │ depends on: sun-core    │
+        └─────────────────────────┘
+
+        ┌─────────────────────────┐
+        │    sun-openrndr         │
+        │  (OPENRNDR rendering)   │
+        │                         │
+        │ depends on: sun-core    │
+        └─────────────────────────┘
+
+              ↓         ↓
+         ┌────────────────────────┐
+         │     sun-core           │
+         │  (Pure logic layer)    │
+         │                        │
+         │ No external rendering  │
+         │ dependencies           │
+         └────────────────────────┘
+```
+
+## Architecture
+
+The core shader algorithm is platform-agnostic. Different rendering backends provide:
+1. **Noise generator implementation** - Adapts noise functions to the core interface
+2. **Color output** - Converts core ColorValue to platform-specific format
+3. **Rendering loop** - Drives the shader with time and parameters
+
+This allows the same shader logic to run on desktop (OPENRNDR) or embedded hardware (FastLED).
