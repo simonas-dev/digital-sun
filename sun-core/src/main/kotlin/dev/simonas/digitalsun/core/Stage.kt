@@ -9,12 +9,19 @@ class Stage {
     }
 
     private val pixels = mutableListOf<Pixel>().apply {
-        addRow(y = 0 * verticalMargin + verticalOffset, fromX = 30 +  2 + horizontalMargin * 3, toX = 30 + 50 - horizontalMargin * 3)
-        addRow(y = 1 * verticalMargin + verticalOffset, fromX = 30 +  2 + horizontalMargin * 1, toX = 30 + 50 - horizontalMargin * 1)
-        addRow(y = 2 * verticalMargin + verticalOffset, fromX = 30 +  2, toX = 30 + 50)
-        addRow(y = 3 * verticalMargin + verticalOffset, fromX = 30 +  2, toX = 30 + 50)
-        addRow(y = 4 * verticalMargin + verticalOffset, fromX = 30 +  2 + horizontalMargin * 1, toX = 30 + 50 - horizontalMargin * 1)
-        addRow(y = 5 * verticalMargin + verticalOffset, fromX = 30 +  2 + horizontalMargin * 3, toX = 30 + 50 - horizontalMargin * 3)
+        val centerX = 30 + 26
+        // 24 pixels
+        addRow(y = 0 * verticalMargin + verticalOffset, fromX = centerX - 12, toX = centerX + 12)
+        // 42 pixels
+        addRow(y = 1 * verticalMargin + verticalOffset, fromX = centerX - 21, toX = centerX + 21)
+        // 48 pixels
+        addRow(y = 2 * verticalMargin + verticalOffset, fromX = centerX - 24, toX = centerX + 24)
+        // 48 pixels
+        addRow(y = 3 * verticalMargin + verticalOffset, fromX = centerX - 24, toX = centerX + 24)
+        // 42 pixels
+        addRow(y = 4 * verticalMargin + verticalOffset, fromX = centerX - 21, toX = centerX + 21)
+        // 24 pixels
+        addRow(y = 5 * verticalMargin + verticalOffset, fromX = centerX - 12, toX = centerX + 12)
     }
 
     fun getPixels(): List<Pixel> = pixels

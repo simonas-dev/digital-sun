@@ -9,7 +9,9 @@ fun main() {
     println("Digital Sun - RPI LED Control")
     println("==============================")
 
-    val ledCount = 60
+    val stage = Stage()
+    val pixels = stage.getPixels()
+    val ledCount = pixels.size()
     val gpioPin = 18
 
     println("Initializing $ledCount LEDs on GPIO $gpioPin...")
@@ -18,9 +20,6 @@ fun main() {
         LedStrip(ledCount, gpioPin, brightness = 128u).use { leds ->
             println("Initialization successful!")
 
-            // Create stage with pixel layout
-            val stage = Stage()
-            val pixels = stage.getPixels()
             println("Stage initialized with ${pixels.size} pixels")
 
             // Create shader with RPI noise generator
