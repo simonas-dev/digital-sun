@@ -1,0 +1,41 @@
+headers = ws2811.h
+headerFilter = ws2811.h
+package = dev.simonas.digitalsun.rpi.native
+
+compilerOpts.linux_arm64 = -I/usr/local/include
+linkerOpts.linux_arm64 = -L/usr/local/lib -lws2811
+
+---
+
+// Additional helper functions for easier Kotlin interop
+#include <ws2811.h>
+#include <stdint.h>
+
+// Helper to set LED color at index
+static inline void ws2811_set_led_color(ws2811_t *ws2811, int channel, int index, uint32_t color) {
+    if (channel >= 0 && channel < RPI_PWM_CHANNELS) {
+        if (index >= 0 && index < ws2811->channel[channel].count) {
+            ws2811->channel[channel].leds[index] = color;
+        }
+    }
+}
+
+// Helper to get LED color at index
+static inline uint32_t ws2811_get_led_color(ws2811_t *ws2811, int channel, int index) {
+    if (channel >= 0 && channel < RPI_PWM_CHANNELS) {
+        if (index >= 0 && index < ws2811->channel[channel].count) {
+            return ws2811->channel[channel].leds[index];
+        }
+    }
+    return 0;
+}
+
+// Helper to create RGB color (0xWWRRGGBB format, WW=0 for RGB strips)
+static inline uint32_t ws2811_color_rgb(uint8_t r, uint8_t g, uint8_t b) {
+    return (r << 16) | (g << 8) | b;
+}
+
+// Helper to create RGBW color
+static inline uint32_t ws2811_color_rgbw(uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+    return (w << 24) | (r << 16) | (g << 8) | b;
+}

@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.shadow) apply false
     alias(libs.plugins.runtime) apply false
     alias(libs.plugins.kotlin.serialization) apply false
@@ -12,4 +13,4 @@ version = "1.0.0"
 // Actual implementations are in:
 // - sun-core: Pure Kotlin logic
 // - sun-openrndr: OPENRNDR visualization
-// - sun-fastled: Raspberry Pi LED rendering
+// - target-rpi: Raspberry Pi LED rendering via rpi_ws281x
