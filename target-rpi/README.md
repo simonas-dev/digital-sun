@@ -43,12 +43,27 @@ sudo java -jar target-rpi/build/libs/target-rpi-1.0.0.jar
 
 ## Usage
 
+The default application runs the Digital Sun animation using the core shader algorithm:
+
+```bash
+sudo java -jar target-rpi/build/libs/target-rpi-1.0.0.jar
+```
+
+This will:
+- Initialize the LED strip with the Stage pixel layout
+- Run the V1RedShaderAlgorithm with Perlin noise
+- Animate the LEDs at ~60 FPS
+- Display FPS stats every 100 frames
+
+### Custom Usage
+
 ```kotlin
 import dev.simonas.digitalsun.rpi.*
+import dev.simonas.digitalsun.core.*
 
 fun main() {
     LedStrip(ledCount = 60, gpioPin = 18).use { leds ->
-        // Set first LED red
+        // Manual control
         leds[0] = Color.RED
         leds.show()
 
@@ -56,9 +71,21 @@ fun main() {
         leds.fill(Color.GREEN)
         leds.show()
 
-        // Clear
-        leds.clear()
-        leds.show()
+        // Or use the shader for animation
+        val noiseGenerator = RpiNoiseGenerator()
+        val shader = V1RedShaderAlgorithm(noiseGenerator)
+        val params = ShaderParameters()
+        val stage = Stage()
+
+        while (true) {
+            val t = System.currentTimeMillis() / 1000.0
+            stage.getPixels().forEachIndexed { index, pixel ->
+                val color = shader.shade(pixel.x, pixel.y, t, params)
+                leds[index] = color.toRpiColor()
+            }
+            leds.show()
+            Thread.sleep(16)
+        }
     }
 }
 ```

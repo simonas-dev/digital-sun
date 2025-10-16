@@ -88,6 +88,16 @@ data class Color(val r: UByte, val g: UByte, val b: UByte, val w: UByte = 0u) {
 }
 
 /**
+ * Extension function to convert core ColorValue to RPI Color
+ */
+fun dev.simonas.digitalsun.core.ColorValue.toRpiColor(): Color {
+    val r = (this.r * this.a * 255).toInt().coerceIn(0, 255).toUByte()
+    val g = (this.g * this.a * 255).toInt().coerceIn(0, 255).toUByte()
+    val b = (this.b * this.a * 255).toInt().coerceIn(0, 255).toUByte()
+    return Color(r, g, b)
+}
+
+/**
  * LED Strip controller using rpi_ws281x
  */
 class LedStrip(

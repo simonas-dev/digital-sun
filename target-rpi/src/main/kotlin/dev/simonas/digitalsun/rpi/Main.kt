@@ -1,10 +1,13 @@
 package dev.simonas.digitalsun.rpi
 
+import dev.simonas.digitalsun.core.ShaderParameters
+import dev.simonas.digitalsun.core.Stage
+import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
 import kotlin.system.exitProcess
 
 fun main() {
-    println("rpi_ws281x LED Control")
-    println("======================")
+    println("Digital Sun - RPI LED Control")
+    println("==============================")
 
     val ledCount = 60
     val gpioPin = 18
@@ -12,68 +15,57 @@ fun main() {
     println("Initializing $ledCount LEDs on GPIO $gpioPin...")
 
     try {
-        LedStrip(ledCount, gpioPin).use { leds ->
+        LedStrip(ledCount, gpioPin, brightness = 128u).use { leds ->
             println("Initialization successful!")
 
-            // Example 1: First LED red
-            println("\nExample 1: First LED RED")
-            leds.clear()
-            leds[0] = Color.RED
-            leds.show()
-            Thread.sleep(2000)
+            // Create stage with pixel layout
+            val stage = Stage()
+            val pixels = stage.getPixels()
+            println("Stage initialized with ${pixels.size} pixels")
 
-            // Example 2: Rainbow
-            println("Example 2: Rainbow pattern")
-            leds.clear()
-            leds[0] = Color.RED
-            leds[1] = Color(255u, 127u, 0u)
-            leds[2] = Color.YELLOW
-            leds[3] = Color.GREEN
-            leds[4] = Color.CYAN
-            leds[5] = Color.BLUE
-            leds[6] = Color.MAGENTA
-            leds.show()
-            Thread.sleep(2000)
+            // Create shader with RPI noise generator
+            val noiseGenerator = RpiNoiseGenerator()
+            val shader = V1RedShaderAlgorithm(noiseGenerator)
+            val params = ShaderParameters()
 
-            // Example 3: Fill green
-            println("Example 3: Fill all GREEN")
-            leds.fill(Color.GREEN)
-            leds.show()
-            Thread.sleep(2000)
+            println("Starting animation loop (Ctrl+C to stop)...")
+            println("Parameters: seed=${params.seed}, spatialScale=${params.spatialScale}, timeScale=${params.timeScale}")
 
-            // Example 4: Breathing
-            println("Example 4: Breathing effect")
-            leds.fill(Color.RED)
-            for (brightness in 255 downTo 0 step 5) {
-                leds.setBrightness(brightness.toUByte())
-                leds.show()
-                Thread.sleep(20)
-            }
-            for (brightness in 0..255 step 5) {
-                leds.setBrightness(brightness.toUByte())
-                leds.show()
-                Thread.sleep(20)
-            }
+            val startTime = System.currentTimeMillis()
+            var frameCount = 0
 
-            // Example 5: Chase
-            println("Example 5: Chase effect")
-            leds.clear()
-            leds.setBrightness(255u)
-            repeat(3) {
-                for (i in 0 until minOf(10, ledCount)) {
-                    leds[i] = Color.BLUE
-                    leds.show()
-                    if (i > 0) leds[i - 1] = Color.BLACK
-                    Thread.sleep(100)
+            while (true) {
+                val t = (System.currentTimeMillis() - startTime) / 1000.0
+
+                // Shade each pixel using the core shader algorithm
+                pixels.forEachIndexed { index, pixel ->
+                    if (index < ledCount) {
+                        val colorValue = shader.shade(pixel.x, pixel.y, t, params)
+
+                        // Convert ColorValue (0.0-1.0) to Color (0-255)
+                        val r = (colorValue.r * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
+                        val g = (colorValue.g * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
+                        val b = (colorValue.b * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
+
+                        leds[index] = Color(r, g, b)
+                    }
                 }
+
+                leds.show()
+                frameCount++
+
+                // Print FPS every 100 frames
+                if (frameCount % 100 == 0) {
+                    val fps = frameCount / t
+                    println("Time: %.2fs, FPS: %.1f, Frame: %d".format(t, fps, frameCount))
+                }
+
+                // Target ~60 FPS
+                Thread.sleep(16)
             }
-
-            println("\nClearing all LEDs...")
-            leds.clear()
-            leds.show()
         }
-
-        println("Done!")
+    } catch (e: InterruptedException) {
+        println("\nShutting down gracefully...")
     } catch (e: Exception) {
         println("Error: ${e.message}")
         e.printStackTrace()
