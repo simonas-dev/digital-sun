@@ -55,43 +55,51 @@ Included modules:
 
 The visualization will use sun-core for logic and OPENRNDR for rendering.
 
-## Building on Raspberry Pi
+## Building for Raspberry Pi
 
-### Prerequisites
+**Important Limitation**: Due to Kotlin/Native constraints, you **cannot** build `target-rpi` directly on Raspberry Pi or cross-compile from macOS.
 
-1. Install JDK:
-```bash
-sudo apt-get update
-sudo apt-get install openjdk-17-jdk
+### Supported Build Platform
+
+- **Linux x86-64 ONLY** - You must build on a Linux x86-64 machine (physical, VM, Docker, or CI/CD)
+
+### Why This Limitation?
+
+1. Kotlin/Native doesn't support Linux ARM64 (Raspberry Pi) as a **host** platform
+2. Cross-compilation from macOS requires all library symbols at link time (not possible with rpi_ws281x)
+
+### Recommended: GitHub Actions
+
+The easiest approach is to use GitHub Actions to build automatically:
+
+```yaml
+name: Build Raspberry Pi Binary
+on: [push]
+jobs:
+  build-rpi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+      - name: Install rpi_ws281x
+        run: |
+          sudo apt-get update && sudo apt-get install -y cmake build-essential
+          git clone https://github.com/jgarff/rpi_ws281x.git
+          cd rpi_ws281x && mkdir build && cd build
+          cmake -D BUILD_SHARED=ON .. && cmake --build .
+          sudo make install && sudo ldconfig
+      - name: Build
+        run: ./gradlew :target-rpi:linkReleaseExecutableLinuxArm64
+      - uses: actions/upload-artifact@v3
+        with:
+          name: target-rpi-binary
+          path: target-rpi/build/bin/linuxArm64/releaseExecutable/target-rpi.kexe
 ```
 
-2. Install rpi_ws281x library:
-```bash
-# Install build dependencies
-sudo apt-get install cmake build-essential
-
-# Clone and build rpi_ws281x
-git clone https://github.com/jgarff/rpi_ws281x.git
-cd rpi_ws281x
-mkdir build && cd build
-cmake -D BUILD_SHARED=ON ..
-cmake --build .
-sudo make install
-sudo ldconfig
-```
-
-### Build Commands
-
-```bash
-# Build all Raspberry Pi modules
-./gradlew build
-
-# Build only the rpi_ws281x executable (faster)
-./gradlew :target-rpi:linkReleaseExecutableLinuxArm64
-
-# Run the LED control program (requires sudo for GPIO access)
-sudo ./target-rpi/build/bin/linuxArm64/releaseExecutable/target-rpi.kexe
-```
+See [target-rpi/CROSS-COMPILE.md](target-rpi/CROSS-COMPILE.md) for more build options (Docker, Linux VM, etc.).
 
 ## Project Structure
 
@@ -134,10 +142,11 @@ This is expected. The target-rpi module is excluded on macOS because it requires
 ### Raspberry Pi: "sun-openrndr not found"
 This is expected. The OPENRNDR visualization module is excluded on Raspberry Pi to reduce build time and dependencies.
 
-### Build fails with "ws2811.h not found"
-You're trying to build target-rpi without the rpi_ws281x library installed. Either:
-1. Install rpi_ws281x (see prerequisites above)
-2. Build on the correct platform (macOS shouldn't include target-rpi)
+### Cannot build target-rpi on Raspberry Pi
+This is a Kotlin/Native limitation. You must build on Linux x86-64. See [target-rpi/CROSS-COMPILE.md](target-rpi/CROSS-COMPILE.md) for solutions.
+
+### Cannot cross-compile from macOS
+This is expected. Use GitHub Actions or a Linux x86-64 machine to build. See [target-rpi/CROSS-COMPILE.md](target-rpi/CROSS-COMPILE.md).
 
 ### IntelliJ/IDE shows "unresolved reference" for excluded modules
 This is expected. Your IDE may cache the full project structure. Reimport the Gradle project or restart the IDE after switching platforms.

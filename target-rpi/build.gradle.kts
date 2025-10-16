@@ -1,25 +1,33 @@
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.jvm)
+    application
 }
 
 group = "dev.simonas.digitalsun"
 version = "1.0.0"
 
-kotlin {
-    linuxArm64("linuxArm64") {
-        compilations.getByName("main") {
-            cinterops {
-                val ws2811 by creating {
-                    defFile(project.file("src/nativeInterop/cinterop/ws2811.def"))
-                    packageName("dev.simonas.digitalsun.rpi.native")
-                }
-            }
-        }
+application {
+    mainClass.set("dev.simonas.digitalsun.rpi.MainKt")
+}
 
-        binaries {
-            executable {
-                entryPoint = "dev.simonas.digitalsun.rpi.main"
-            }
-        }
+dependencies {
+    implementation(project(":sun-core"))
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.slf4j.api)
+    implementation(libs.kotlin.logging)
+
+    // JNA for native library access
+    implementation("net.java.dev.jna:jna:5.14.0")
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "dev.simonas.digitalsun.rpi.MainKt"
     }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }

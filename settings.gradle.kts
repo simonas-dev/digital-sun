@@ -28,19 +28,19 @@ when {
         println("Building for macOS: Including sun-openrndr")
     }
     osName.contains("linux") && (osArch.contains("arm") || osArch.contains("aarch64")) -> {
-        // Raspberry Pi (Linux ARM): Include rpi_ws281x hardware module
+        // Raspberry Pi (Linux ARM): Include JVM-based LED control
         include("target-rpi")
         println("Building for Raspberry Pi: Including target-rpi")
     }
     osName.contains("linux") -> {
-        // Linux x86: Include both for testing
+        // Linux x86: Include both
         include("sun-openrndr")
         include("target-rpi")
         println("Building for Linux x86: Including both modules")
     }
     else -> {
         println("Unknown platform: $osName ($osArch)")
-        println("Including all modules by default")
+        println("Including all modules")
         include("sun-openrndr")
         include("target-rpi")
     }
