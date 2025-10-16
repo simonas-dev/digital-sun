@@ -2,34 +2,30 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    kotlin("jvm")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "dev.simonas.digitalsun"
 version = "1.0.0"
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     // Kotlin standard library
     implementation(kotlin("stdlib-jdk8"))
 
     // Coroutines for async operations
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation(libs.kotlinx.coroutines.core)
 
     // Serialization for parameter saving/loading
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
 
     // Logging
-    implementation("org.slf4j:slf4j-api:2.0.17")
-    implementation("io.github.oshai:kotlin-logging:7.0.13")
+    implementation(libs.slf4j.api)
+    implementation(libs.kotlin.logging)
 
     // Testing
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 }
 
 java {

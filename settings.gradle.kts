@@ -7,6 +7,12 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
 include("sun-core")
 include("sun-openrndr")
-include("sun-fastled")
