@@ -1,4 +1,4 @@
-rootProject.name = "openrndr-template"
+rootProject.name = "digital-sun"
 
 pluginManagement {
     repositories {
@@ -6,3 +6,6 @@ pluginManagement {
         mavenLocal()
     }
 }
+
+include("sun-openrndr")
+include("sun-core")
