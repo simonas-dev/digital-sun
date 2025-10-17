@@ -5,6 +5,7 @@ import dev.simonas.digitalsun.core.Stage
 import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
 import kotlinx.coroutines.*
 import kotlin.system.exitProcess
+import kotlin.system.measureNanoTime
 
 fun main() {
     println("Digital Sun - RPI LED Control")
@@ -18,11 +19,20 @@ fun main() {
     println("Initializing $ledCount LEDs on GPIO $gpioPin...")
 
     val ledStrip = LedStrip(ledCount, gpioPin, brightness = 128u)
+    ledStrip.clear()
+
+    // Scope for all animation coroutines - we'll cancel this on shutdown
+    val animationScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
     // Single shutdown hook handles ALL cleanup - invoked on SIGTERM, SIGINT, or normal exit
     Runtime.getRuntime().addShutdownHook(Thread {
         println("\nShutdown signal received, cleaning up...")
         try {
+            // CRITICAL: Cancel coroutines FIRST to stop ledStrip access
+            animationScope.cancel()
+            Thread.sleep(150) // Give coroutines time to finish their current iteration
+
+            // Now safe to access hardware - no concurrent access
             ledStrip.clear()
             ledStrip.show()
             ledStrip.close()
@@ -45,7 +55,7 @@ fun main() {
 
     val startTime = System.currentTimeMillis()
 
-    runBlocking(Dispatchers.Default) {
+    runBlocking {
         val sharedLeds = createArrayOfSize(ledCount, Color(0.toUByte(), 0.toUByte(), 0.toUByte()))
 
         // FPS tracking for shader coroutine
@@ -57,7 +67,7 @@ fun main() {
         var renderLastReport = System.currentTimeMillis()
 
         // Shader coroutine - calculates pixel colors
-        launch {
+        animationScope.launch {
             while (isActive) {
                 val t = (System.currentTimeMillis() - startTime) / 1000.0
 
@@ -90,7 +100,7 @@ fun main() {
         }
 
         // Render coroutine - updates LED strip
-        launch {
+        animationScope.launch {
             while (isActive) {
                 sharedLeds.forEachIndexed { index, pixel ->
                     ledStrip[index] = pixel
@@ -107,9 +117,11 @@ fun main() {
                     println("[Render] FPS: %.1f, Frame: %d".format(fps, renderFrameCount))
                     renderLastReport = now
                 }
-                delay(16)
             }
         }
+
+        // Wait for animation scope to complete (happens when shutdown hook cancels it)
+        animationScope.coroutineContext[Job]?.join()
     }
 }
 
