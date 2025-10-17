@@ -37,7 +37,10 @@ cd ~/digital-sun
 # Build (this WILL work - it's just JVM code)
 ./gradlew :target-rpi:build
 
-# Run (requires sudo for GPIO)
+# Run with optimized JVM settings (recommended)
+sudo ./target-rpi/run.sh
+
+# Or run directly (not optimized)
 sudo java -jar target-rpi/build/libs/target-rpi-1.0.0.jar
 ```
 

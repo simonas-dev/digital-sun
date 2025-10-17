@@ -12,3 +12,6 @@ gui-parameters/
 ffmpegOutput.txt
 ShaderError.glsl
 
+# Deployment configuration
+.env
+
