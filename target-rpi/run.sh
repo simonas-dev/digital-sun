@@ -1,5 +1,5 @@
 #!/bin/bash
-# Optimized startup script for Digital Sun on Raspberry Pi
+# Startup script for Digital Sun on Raspberry Pi
 
 set -e
 
@@ -26,23 +26,10 @@ if [ -f "$PID_FILE" ]; then
     fi
 fi
 
-echo "Starting Digital Sun with optimized JVM settings..."
-echo ""
+echo "Starting Digital Sun..."
 
-# Trap signals and forward to Java process
-JAVA_PID=""
-cleanup() {
-    echo ""
-    echo "Caught signal, stopping Java process..."
-    if [ ! -z "$JAVA_PID" ]; then
-        kill -TERM "$JAVA_PID" 2>/dev/null || true
-        wait "$JAVA_PID" 2>/dev/null || true
-    fi
-    rm -f "$PID_FILE"
-    exit 0
-}
-
-trap cleanup SIGINT SIGTERM
+# Forward signals to Java process - Main.kt shutdown hook handles cleanup
+trap 'kill -TERM "$JAVA_PID" 2>/dev/null; wait "$JAVA_PID" 2>/dev/null; rm -f "$PID_FILE"' SIGINT SIGTERM
 
 # JVM optimization flags for Raspberry Pi
 java \
@@ -59,8 +46,8 @@ java \
 
 JAVA_PID=$!
 echo "$JAVA_PID" > "$PID_FILE"
-echo "Java process started with PID: $JAVA_PID"
+echo "Started with PID: $JAVA_PID"
 
-# Wait for Java process to finish
+# Wait for process, then clean up PID file
 wait "$JAVA_PID"
 rm -f "$PID_FILE"

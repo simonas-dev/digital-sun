@@ -38,23 +38,10 @@ scp target-rpi/build/libs/target-rpi-1.0.0.jar "$RPI_USER@$RPI_HOST:$RPI_DIR/"
 scp target-rpi/run.sh "$RPI_USER@$RPI_HOST:$RPI_DIR/"
 ssh "$RPI_USER@$RPI_HOST" "chmod +x $RPI_DIR/run.sh"
 
-echo "Running with optimized JVM settings..."
+echo "Running on remote..."
 echo "Press Ctrl+C to stop"
 echo ""
 
-# Trap Ctrl+C to kill remote process gracefully
-cleanup_remote() {
-    echo ""
-    echo "Stopping remote process..."
-    # Try graceful shutdown first (SIGTERM)
-    ssh "$RPI_USER@$RPI_HOST" "sudo pkill -TERM -f target-rpi-1.0.0.jar" 2>/dev/null
-    sleep 2
-    # Force kill if still running (SIGKILL)
-    ssh "$RPI_USER@$RPI_HOST" "sudo pkill -9 -f target-rpi-1.0.0.jar" 2>/dev/null || true
-    echo "Remote process stopped"
-}
-
-trap cleanup_remote INT TERM EXIT
-
-# Run with -t to allocate a pseudo-TTY (ensures signals are propagated)
+# Run with -t to allocate a pseudo-TTY (ensures Ctrl+C is forwarded to remote process)
+# SSH will forward SIGINT when you press Ctrl+C, run.sh will forward it to Java, Main.kt cleanup runs
 ssh -t "$RPI_USER@$RPI_HOST" "cd $RPI_DIR && sudo ./run.sh"
