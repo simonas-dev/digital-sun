@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class ShaderParameters(
     val seed: Int = 618,
     val spatialScale: Double = 0.05,
-    val timeScale: Double = 0.424,
+    val timeScale: Double = 0.224,
     val noiseType: NoiseType = NoiseType.PERLIN,
     val alphaPower: Double = 4.0,
     val alphaMin: Double = 0.0,

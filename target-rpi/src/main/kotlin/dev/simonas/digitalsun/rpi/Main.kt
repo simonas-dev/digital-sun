@@ -18,7 +18,7 @@ fun main() {
 
     println("Initializing $ledCount LEDs on GPIO $gpioPin...")
 
-    val ledStrip = LedStrip(ledCount, gpioPin, brightness = 128u)
+    val ledStrip = LedStrip(ledCount, gpioPin, brightness = 255u)
     ledStrip.clear()
 
     // Scope for all animation coroutines - we'll cancel this on shutdown
@@ -87,11 +87,11 @@ fun main() {
 
                 shaderFrameCount++
 
-                // Report shader FPS every 100 frames
-                if (shaderFrameCount % 100 == 0L) {
+                // Report shader FPS on 1000 frames
+                if (shaderFrameCount == 1000L) {
                     val now = System.currentTimeMillis()
                     val elapsed = (now - shaderLastReport) / 1000.0
-                    val fps = 100.0 / elapsed
+                    val fps = 1000.0 / elapsed
                     println("[Shader] FPS: %.1f, Frame: %d".format(fps, shaderFrameCount))
                     shaderLastReport = now
                 }
@@ -109,11 +109,11 @@ fun main() {
 
                 renderFrameCount++
 
-                // Report render FPS every 100 frames
-                if (renderFrameCount % 100 == 0L) {
+                // Report render FPS on 1000 frames
+                if (renderFrameCount == 1000L) {
                     val now = System.currentTimeMillis()
                     val elapsed = (now - renderLastReport) / 1000.0
-                    val fps = 100.0 / elapsed
+                    val fps = 1000.0 / elapsed
                     println("[Render] FPS: %.1f, Frame: %d".format(fps, renderFrameCount))
                     renderLastReport = now
                 }
