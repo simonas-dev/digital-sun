@@ -3,6 +3,7 @@ package dev.simonas.digitalsun.rpi
 import dev.simonas.digitalsun.core.ShaderParameters
 import dev.simonas.digitalsun.core.Stage
 import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
+import dev.simonas.digitalsun.core.WarmColorShaderAlgorithm
 import kotlinx.coroutines.*
 import kotlin.system.exitProcess
 import kotlin.system.measureNanoTime
@@ -47,8 +48,17 @@ fun main() {
 
     // Create shader with RPI noise generator
     val noiseGenerator = RpiNoiseGenerator()
-    val shader = V1RedShaderAlgorithm(noiseGenerator)
+
+    // Choose shader: V1RedShaderAlgorithm or WarmColorShaderAlgorithm
+    val shaderType = System.getenv("SHADER")?.lowercase() ?: "warm"
+    val shader = when (shaderType) {
+        "red" -> V1RedShaderAlgorithm(noiseGenerator)
+        "warm" -> WarmColorShaderAlgorithm(noiseGenerator)
+        else -> WarmColorShaderAlgorithm(noiseGenerator)
+    }
     val params = ShaderParameters()
+
+    println("Using shader: ${shader.javaClass.simpleName}")
 
     println("Starting animation loop (Ctrl+C to stop)...")
     println("Parameters: seed=${params.seed}, spatialScale=${params.spatialScale}, timeScale=${params.timeScale}")

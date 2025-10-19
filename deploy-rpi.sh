@@ -41,7 +41,17 @@ ssh "$RPI_USER@$RPI_HOST" "chmod +x $RPI_DIR/run.sh"
 echo "Running on remote..."
 echo "Press Ctrl+C to stop"
 echo ""
+echo "Shader options:"
+echo "  SHADER=warm ./deploy-rpi.sh  (default - yellow/red/magenta colors)"
+echo "  SHADER=red ./deploy-rpi.sh   (original red-only shader)"
+echo ""
+
+# Pass SHADER environment variable if set
+SHADER_ARG=""
+if [ ! -z "$SHADER" ]; then
+    SHADER_ARG="SHADER=$SHADER"
+fi
 
 # Run with -t to allocate a pseudo-TTY (ensures Ctrl+C is forwarded to remote process)
 # SSH will forward SIGINT when you press Ctrl+C, run.sh will forward it to Java, Main.kt cleanup runs
-ssh -t "$RPI_USER@$RPI_HOST" "cd $RPI_DIR && sudo ./run.sh"
+ssh -t "$RPI_USER@$RPI_HOST" "cd $RPI_DIR && sudo $SHADER_ARG ./run.sh"

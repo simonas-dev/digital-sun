@@ -2,6 +2,22 @@
 
 Kotlin/JVM + JNA bindings for `rpi_ws281x` library. Controls WS281x LED strips on Raspberry Pi.
 
+## Shader Options
+
+Two visualization shaders are available:
+
+| Shader | Colors | Description |
+|--------|--------|-------------|
+| `warm` (default) | Yellow → Red → Magenta | Uses Perlin noise for hue and brightness |
+| `red` | Red only | Original shader, brightness controlled by Perlin noise |
+
+**Usage**:
+```bash
+./deploy-rpi.sh              # Default: warm colors
+SHADER=red ./deploy-rpi.sh   # Red only
+SHADER=warm ./deploy-rpi.sh  # Explicit warm colors
+```
+
 ## Installation on Raspberry Pi
 
 Run these commands **in order**:
