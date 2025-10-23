@@ -47,7 +47,7 @@ class WarmColorShaderAlgorithm(private val noiseGenerator: NoiseGenerator) : Pix
 
         // Use Perlin noise for value - sample in nearby dimension (offset in w-axis conceptually)
         // We offset the coordinates slightly to get correlated but not identical noise
-        val valueOffset = 100.0 // Offset to get different but nearby noise
+        val valueOffset = 0.0 // Offset to get different but nearby noise
         val valueNoise = when (params.noiseType) {
             NoiseType.PERLIN -> {
                 noiseGenerator.perlin(
@@ -83,23 +83,25 @@ class WarmColorShaderAlgorithm(private val noiseGenerator: NoiseGenerator) : Pix
             }
         }
 
-        // Map hue noise (-1 to 1) to warm color range (yellow 60° to magenta 300°)
-        // Yellow = 60°/360° = 0.166667
-        // Red = 0°/360° = 0.0 (or 1.0, wraps around)
-        // Magenta = 300°/360° = 0.833333
-        // Range: 0.833333 (magenta) -> 0.0/1.0 (red) -> 0.166667 (yellow)
-
+        // Map hue noise (-1 to 1) to the configured hue range
         // Convert noise from [-1, 1] to [0, 1]
         val hueNorm = (hueNoise + 1.0) / 2.0
 
-        // Map to warm color range: magenta (0.833) through red (0.0/1.0) to yellow (0.166)
-        // This creates a range that wraps around the hue circle in the warm zone
-        val hue = if (hueNorm < 0.5) {
-            // First half: magenta -> red
-            0.733333 + hueNorm * 0.433334 // 0.833 -> 1.0
+        // Map to the configured hue range
+        // When min > max, the range wraps around the hue circle (e.g., magenta -> red -> yellow)
+        val hue = if (params.hueRange.min > params.hueRange.max) {
+            // Wrapping range (e.g., 0.833 -> 1.0 -> 0.0 -> 0.166)
+            val totalRange = (1.0 - params.hueRange.min) + params.hueRange.max
+            if (hueNorm < 0.5) {
+                // First half: min -> 1.0
+                params.hueRange.min + hueNorm * 2.0 * (1.0 - params.hueRange.min)
+            } else {
+                // Second half: 0.0 -> max
+                (hueNorm - 0.5) * 2.0 * params.hueRange.max
+            }
         } else {
-            // Second half: red -> yellow
-            (hueNorm - 0.5) * 0.433334 // 0.0 -> 0.166
+            // Non-wrapping range: simple linear interpolation
+            params.hueRange.min + hueNorm * (params.hueRange.max - params.hueRange.min)
         }
 
         // Map value noise (-1 to 1) to brightness (0.0 to 1.0) with power curve
