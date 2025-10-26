@@ -9,6 +9,14 @@ import kotlin.system.exitProcess
 import kotlin.system.measureNanoTime
 
 fun main() {
+    try {
+        start()
+    } catch (e: Exception) {
+
+    }
+}
+
+fun start() {
     println("Digital Sun - RPI LED Control")
     println("==============================")
 
