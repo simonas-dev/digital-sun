@@ -103,7 +103,7 @@ fun dev.simonas.digitalsun.core.ColorValue.toRpiColor(): Color {
 class LedStrip(
     private val ledCount: Int,
     private val gpioPin: Int = 18,
-    private val stripType: Int = StripType.WS2811_STRIP_GRB,
+    private val stripType: Int = StripType.WS2811_STRIP_RGB,
     brightness: UByte = 255u,
     private val frequency: Int = WS2811Library.WS2811_TARGET_FREQ,
     private val dmaChannel: Int = 10
