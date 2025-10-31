@@ -12,7 +12,7 @@ fun main() {
     try {
         start()
     } catch (e: Exception) {
-
+        main()
     }
 }
 
