@@ -3,7 +3,11 @@
 
 set -e
 
-JAR_FILE="${JAR_FILE:-target-rpi-1.0.0.jar}"
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Use absolute path for JAR file based on script location
+JAR_FILE="${JAR_FILE:-$SCRIPT_DIR/target-rpi-1.0.0.jar}"
 PID_FILE="${PID_FILE:-/tmp/digital-sun.pid}"
 
 # Check if running with sudo
