@@ -20,8 +20,8 @@ data class HueRange(
         /**
          * Warm color range: magenta (300°) through red (0°) to yellow (60°)
          */
-        val WARM = HueRange(min = 0.833333, max = 0.166667)
-       //val FAINAS_V1 = HueRange(min = 355.0 / 360.0, max = 60.0 / 360.0) // bestest
+//        val WARM = HueRange(min = 0.833333, max = 0.166667)
+//       val FAINAS_V1 = HueRange(min = 355.0 / 360.0, max = 60.0 / 360.0) // bestest
 
         val FAINAS_V1 = HueRange(min = 169.0 / 360.0, max = 69.0 / 360.0) //Emilijos cool
         //val FAINAS_V1 = HueRange(min = 25.0 / 360.0, max = 10.0 / 360.0)
