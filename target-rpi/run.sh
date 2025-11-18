@@ -35,18 +35,8 @@ echo "Starting Digital Sun..."
 # Forward signals to Java process - Main.kt shutdown hook handles cleanup
 trap 'kill -TERM "$JAVA_PID" 2>/dev/null; wait "$JAVA_PID" 2>/dev/null; rm -f "$PID_FILE"' SIGINT SIGTERM
 
-# JVM optimization flags for Raspberry Pi
-java \
-    -server \
-    -XX:+UseG1GC \
-    -XX:MaxGCPauseMillis=10 \
-    -XX:+UseStringDeduplication \
-    -Xms256m \
-    -Xmx512m \
-    -XX:+TieredCompilation \
-    -XX:TieredStopAtLevel=1 \
-    -Djava.awt.headless=true \
-    -jar "$JAR_FILE" &
+# Run the simple script in background for PID management
+"$SCRIPT_DIR/run-simple.sh" &
 
 JAVA_PID=$!
 echo "$JAVA_PID" > "$PID_FILE"
