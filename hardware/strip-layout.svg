@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="560" viewBox="0 0 720 560" version="1.1"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <title>Microsun – LED Strip Physical Layout</title>
+
+  <!-- ── Background ── -->
+  <rect width="720" height="560" fill="#1a1a1a"/>
+
+  <!-- ── Title ── -->
+  <text x="360" y="22" text-anchor="middle" font-family="monospace" font-size="13" fill="#cccccc" font-weight="bold">MICROSUN – LED Strip Physical Layout</text>
+  <text x="360" y="37" text-anchor="middle" font-family="monospace" font-size="10" fill="#888888">Scale 1:1  (1 px = 0.5 mm)   WS2812B 12V, 160 LEDs/m, 2.7 mm wide, 9.34 mm row pitch  ·  604 LEDs total</text>
+
+  <!-- ═══════════════════════════════════════
+       STRIP ROWS
+       x_svg  = (design_x − 11330) × 0.02 + 80
+       y_svg  = (screen_y_center − 11337) × 0.02 + 50
+       strip height drawn = 5 px (≈ 2.5 mm visual)
+       scale = 2 SVG px / mm  →  1 cm = 20 px
+       ═══════════════════════════════════════ -->
+
+  <!-- ── Section label: UPPER HALF (inverted strips) ── -->
+  <line x1="62" y1="50" x2="62" y2="203" stroke="#555" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="58" y="130" text-anchor="middle" font-family="monospace" font-size="9" fill="#888" transform="rotate(-90,58,130)">UPPER HALF  (pads face center)</text>
+
+  <!-- ── Section label: LOWER HALF ── -->
+  <line x1="62" y1="230" x2="62" y2="459" stroke="#555" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="58" y="348" text-anchor="middle" font-family="monospace" font-size="9" fill="#888" transform="rotate(-90,58,348)">LOWER HALF  (pads face center)</text>
+
+  <!-- ── Gap annotation ── -->
+  <line x1="80" y1="207" x2="505" y2="207" stroke="#444" stroke-width="0.5" stroke-dasharray="4,4"/>
+  <line x1="80" y1="229" x2="505" y2="229" stroke="#444" stroke-width="0.5" stroke-dasharray="4,4"/>
+  <rect x="548" y="211" width="125" height="14" rx="2" fill="#2a2a00" stroke="#666633" stroke-width="0.5"/>
+  <text x="610" y="221" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#bbbb44">CONNECTION ZONE  ~8 mm</text>
+
+  <!-- ─────────────────────────────────────────────────────
+       UPPER HALF  (T1–T3 standalone + U1–U6 group)
+       All have scale(1,−1) in SVG source → pads face inward
+       Data flows LEFT → RIGHT
+       ───────────────────────────────────────────────────── -->
+
+  <!-- T1   7.5 cm   6 segs   y≈50 -->
+  <rect x="217.5" y="47.5" width="150" height="5" rx="1" fill="#CC0000"/>
+  <text x="74" y="52" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">T1</text>
+  <text x="74" y="60" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">7.5 cm</text>
+  <text x="370" y="52" text-anchor="middle" font-family="monospace" font-size="7" fill="#993333">← 12 LEDs</text>
+
+  <!-- T2   11.25 cm  9 segs  y≈68 -->
+  <rect x="180" y="65.5" width="225" height="5" rx="1" fill="#D41100"/>
+  <text x="74" y="70" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">T2</text>
+  <text x="74" y="78" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">11.25 cm</text>
+  <text x="292.5" y="70" text-anchor="middle" font-family="monospace" font-size="7" fill="#993333">← 18 LEDs</text>
+
+  <!-- T3   13.75 cm  11 segs  y≈87 -->
+  <rect x="155" y="84.5" width="275" height="5" rx="1" fill="#DD2200"/>
+  <text x="74" y="89" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">T3</text>
+  <text x="74" y="97" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">13.75 cm</text>
+  <text x="292.5" y="89" text-anchor="middle" font-family="monospace" font-size="7" fill="#993333">← 22 LEDs</text>
+
+  <!-- U1   16.25 cm  13 segs  y≈106 -->
+  <rect x="130" y="103.5" width="325" height="5" rx="1" fill="#EE3300"/>
+  <text x="74" y="108" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">U1</text>
+  <text x="74" y="116" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">16.25 cm</text>
+  <text x="292.5" y="108" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc5533">← 26 LEDs</text>
+
+  <!-- U2   17.5 cm  14 segs  y≈124 -->
+  <rect x="117.5" y="121.5" width="350" height="5" rx="1" fill="#FF4400"/>
+  <text x="74" y="126" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">U2</text>
+  <text x="74" y="134" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">17.5 cm</text>
+  <text x="292.5" y="126" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc5533">← 28 LEDs</text>
+
+  <!-- U3   18.75 cm  15 segs  y≈143 -->
+  <rect x="105" y="140.5" width="375" height="5" rx="1" fill="#FF6600"/>
+  <text x="74" y="145" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">U3</text>
+  <text x="74" y="153" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">18.75 cm</text>
+  <text x="292.5" y="145" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc6633">← 30 LEDs</text>
+
+  <!-- U4   20 cm  16 segs  y≈162 -->
+  <rect x="92.5" y="159.5" width="400" height="5" rx="1" fill="#FF8800"/>
+  <text x="74" y="164" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">U4</text>
+  <text x="74" y="172" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">20 cm</text>
+  <text x="292.5" y="164" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc7733">← 32 LEDs</text>
+
+  <!-- U5   20 cm  16 segs  y≈180 -->
+  <rect x="92.5" y="177.5" width="400" height="5" rx="1" fill="#FFAA00"/>
+  <text x="74" y="182" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">U5</text>
+  <text x="74" y="190" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">20 cm</text>
+  <text x="292.5" y="182" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc8833">← 32 LEDs</text>
+
+  <!-- U6   21.25 cm  17 segs  y≈199 -->
+  <rect x="80" y="196.5" width="425" height="5" rx="1" fill="#FFCC00"/>
+  <text x="74" y="201" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">U6</text>
+  <text x="74" y="209" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">21.25 cm</text>
+  <text x="292.5" y="201" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc9933">← 34 LEDs</text>
+
+  <!-- ─────────────────────────────────────────────────────
+       LOWER HALF  (M1–M4 equatorial + L1–L9 lower group)
+       Normal orientation  →  pads face inward / upward
+       Data flows LEFT → RIGHT
+       ───────────────────────────────────────────────────── -->
+
+  <!-- M1   21.25 cm  17 segs  y≈234 -->
+  <rect x="80" y="231.5" width="425" height="5" rx="1" fill="#FFD700"/>
+  <text x="74" y="236" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">M1</text>
+  <text x="74" y="244" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">21.25 cm</text>
+  <text x="292.5" y="236" text-anchor="middle" font-family="monospace" font-size="7" fill="#aa8800">34 LEDs →</text>
+
+  <!-- M2   21.25 cm  17 segs  y≈253 -->
+  <rect x="80" y="250.5" width="425" height="5" rx="1" fill="#FFD700"/>
+  <text x="74" y="255" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">M2</text>
+  <text x="74" y="263" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">21.25 cm</text>
+  <text x="292.5" y="255" text-anchor="middle" font-family="monospace" font-size="7" fill="#aa8800">34 LEDs →</text>
+
+  <!-- M3   21.25 cm  17 segs  y≈269 -->
+  <rect x="80" y="266.5" width="425" height="5" rx="1" fill="#FFD700"/>
+  <text x="74" y="271" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">M3</text>
+  <text x="74" y="279" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">21.25 cm</text>
+  <text x="292.5" y="271" text-anchor="middle" font-family="monospace" font-size="7" fill="#aa8800">34 LEDs →</text>
+
+  <!-- M4   21.25 cm  17 segs  y≈287 -->
+  <rect x="80" y="284.5" width="425" height="5" rx="1" fill="#FFD700"/>
+  <text x="74" y="289" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">M4</text>
+  <text x="74" y="297" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">21.25 cm</text>
+  <text x="292.5" y="289" text-anchor="middle" font-family="monospace" font-size="7" fill="#aa8800">34 LEDs →</text>
+
+  <!-- L1   21.25 cm  17 segs  y≈306 -->
+  <rect x="80" y="303.5" width="425" height="5" rx="1" fill="#FFAA00"/>
+  <text x="74" y="308" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L1</text>
+  <text x="74" y="316" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">21.25 cm</text>
+  <text x="292.5" y="308" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc8833">34 LEDs →</text>
+
+  <!-- L2   20 cm  16 segs  y≈325 -->
+  <rect x="92.5" y="322.5" width="400" height="5" rx="1" fill="#FF8800"/>
+  <text x="74" y="327" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L2</text>
+  <text x="74" y="335" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">20 cm</text>
+  <text x="292.5" y="327" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc7733">32 LEDs →</text>
+
+  <!-- L3   20 cm  16 segs  y≈343 -->
+  <rect x="92.5" y="340.5" width="400" height="5" rx="1" fill="#FF6600"/>
+  <text x="74" y="345" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L3</text>
+  <text x="74" y="353" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">20 cm</text>
+  <text x="292.5" y="345" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc6633">32 LEDs →</text>
+
+  <!-- L4   18.75 cm  15 segs  y≈362 -->
+  <rect x="105" y="359.5" width="375" height="5" rx="1" fill="#FF4400"/>
+  <text x="74" y="364" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L4</text>
+  <text x="74" y="372" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">18.75 cm</text>
+  <text x="292.5" y="364" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc5533">30 LEDs →</text>
+
+  <!-- L5   17.5 cm  14 segs  y≈381 -->
+  <rect x="117.5" y="378.5" width="350" height="5" rx="1" fill="#EE3300"/>
+  <text x="74" y="383" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L5</text>
+  <text x="74" y="391" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">17.5 cm</text>
+  <text x="292.5" y="383" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc5533">28 LEDs →</text>
+
+  <!-- L6   16.25 cm  13 segs  y≈399 -->
+  <rect x="130" y="396.5" width="325" height="5" rx="1" fill="#DD2200"/>
+  <text x="74" y="401" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L6</text>
+  <text x="74" y="409" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">16.25 cm</text>
+  <text x="292.5" y="401" text-anchor="middle" font-family="monospace" font-size="7" fill="#993333">26 LEDs →</text>
+
+  <!-- L7   13.75 cm  11 segs  y≈418 -->
+  <rect x="155" y="415.5" width="275" height="5" rx="1" fill="#CC1100"/>
+  <text x="74" y="420" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L7</text>
+  <text x="74" y="428" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">13.75 cm</text>
+  <text x="292.5" y="420" text-anchor="middle" font-family="monospace" font-size="7" fill="#993333">22 LEDs →</text>
+
+  <!-- L8   11.25 cm  9 segs  y≈437 -->
+  <rect x="180" y="434.5" width="225" height="5" rx="1" fill="#BB0000"/>
+  <text x="74" y="439" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L8</text>
+  <text x="74" y="447" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">11.25 cm</text>
+  <text x="292.5" y="439" text-anchor="middle" font-family="monospace" font-size="7" fill="#993333">18 LEDs →</text>
+
+  <!-- L9   7.5 cm  6 segs  y≈455 -->
+  <rect x="217.5" y="452.5" width="150" height="5" rx="1" fill="#AA0000"/>
+  <text x="74" y="457" text-anchor="end" font-family="monospace" font-size="8" fill="#aaaaaa">L9</text>
+  <text x="74" y="465" text-anchor="end" font-family="monospace" font-size="7.5" fill="#666666">7.5 cm</text>
+  <text x="292.5" y="457" text-anchor="middle" font-family="monospace" font-size="7" fill="#993333">12 LEDs →</text>
+
+  <!-- ── Vertical dimension line (left side) ── -->
+  <!-- Overall height arrow: 21.25 cm -->
+  <line x1="22" y1="50" x2="22" y2="457" stroke="#666" stroke-width="1"/>
+  <line x1="18" y1="50" x2="26" y2="50" stroke="#666" stroke-width="1"/>
+  <line x1="18" y1="457" x2="26" y2="457" stroke="#666" stroke-width="1"/>
+  <text x="18" y="258" text-anchor="middle" font-family="monospace" font-size="9" fill="#888" transform="rotate(-90,18,258)">21.25 cm  (full height)</text>
+
+  <!-- Upper half brace -->
+  <line x1="38" y1="50" x2="38" y2="201" stroke="#555" stroke-width="1"/>
+  <line x1="34" y1="50" x2="42" y2="50" stroke="#555" stroke-width="1"/>
+  <line x1="34" y1="201" x2="42" y2="201" stroke="#555" stroke-width="1"/>
+  <text x="34" y="130" text-anchor="middle" font-family="monospace" font-size="8" fill="#777" transform="rotate(-90,34,130)">9 strips</text>
+
+  <!-- Lower half brace -->
+  <line x1="38" y1="232" x2="38" y2="457" stroke="#555" stroke-width="1"/>
+  <line x1="34" y1="232" x2="42" y2="232" stroke="#555" stroke-width="1"/>
+  <line x1="34" y1="457" x2="42" y2="457" stroke="#555" stroke-width="1"/>
+  <text x="34" y="348" text-anchor="middle" font-family="monospace" font-size="8" fill="#777" transform="rotate(-90,34,348)">13 strips</text>
+
+  <!-- ── Horizontal dimension line (top, max width 21.25cm) ── -->
+  <line x1="80" y1="20" x2="505" y2="20" stroke="#666" stroke-width="1"/>
+  <line x1="80" y1="16" x2="80" y2="24" stroke="#666" stroke-width="1"/>
+  <line x1="505" y1="16" x2="505" y2="24" stroke="#666" stroke-width="1"/>
+  <text x="292.5" y="16" text-anchor="middle" font-family="monospace" font-size="9" fill="#888">21.25 cm max width</text>
+
+  <!-- ── Row pitch annotation ── -->
+  <line x1="520" y1="50" x2="520" y2="68" stroke="#555" stroke-width="1"/>
+  <line x1="517" y1="50" x2="523" y2="50" stroke="#555" stroke-width="1"/>
+  <line x1="517" y1="68" x2="523" y2="68" stroke="#555" stroke-width="1"/>
+  <text x="530" y="60" font-family="monospace" font-size="8" fill="#777">9.34 mm</text>
+  <text x="530" y="69" font-family="monospace" font-size="8" fill="#777">pitch</text>
+
+  <!-- ── Scale bar ── -->
+  <rect x="530" y="430" width="100" height="6" rx="1" fill="none" stroke="#666" stroke-width="1"/>
+  <rect x="530" y="430" width="50" height="6" fill="#555"/>
+  <text x="530" y="448" font-family="monospace" font-size="8" fill="#777">0</text>
+  <text x="577" y="448" text-anchor="middle" font-family="monospace" font-size="8" fill="#777">2.5 cm</text>
+  <text x="630" y="448" text-anchor="end" font-family="monospace" font-size="8" fill="#777">5 cm</text>
+
+  <!-- ── Legend ── -->
+  <rect x="530" y="460" width="180" height="75" rx="3" fill="#222" stroke="#444" stroke-width="0.5"/>
+  <text x="540" y="474" font-family="monospace" font-size="9" font-weight="bold" fill="#aaaaaa">LEGEND</text>
+  <rect x="540" y="479" width="20" height="4" rx="1" fill="#FF8800"/>
+  <text x="565" y="484" font-family="monospace" font-size="8" fill="#888888">WS2812B 12V, 2.7 mm, 160/m</text>
+  <rect x="540" y="490" width="8" height="8" rx="1" fill="#C3CEED"/>
+  <text x="565" y="499" font-family="monospace" font-size="8" fill="#888888">WS2812 LED die</text>
+  <rect x="540" y="503" width="8" height="8" rx="1" fill="#CF6515"/>
+  <text x="565" y="512" font-family="monospace" font-size="8" fill="#888888">Solder pad</text>
+  <text x="540" y="525" font-family="monospace" font-size="8" fill="#888888">←  Data flow direction</text>
+
+  <!-- ── Data flow arrow (upper half) ── -->
+  <text x="217.5" y="46" font-family="monospace" font-size="7" fill="#666">DIN</text>
+  <text x="360" y="46" font-family="monospace" font-size="7" fill="#555">→→→ (upper strips flow L→R)</text>
+
+  <!-- ── Data flow arrow (lower half) ── -->
+  <text x="80" y="228" font-family="monospace" font-size="7" fill="#666">DIN</text>
+  <text x="185" y="228" font-family="monospace" font-size="7" fill="#555">→→→ (lower strips flow L→R)</text>
+
+</svg>

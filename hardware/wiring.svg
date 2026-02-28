@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="760" height="580" viewBox="0 0 760 580" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <title>Microsun – Wiring Diagram</title>
+
+  <!-- ── Background ── -->
+  <rect width="760" height="580" fill="#1a1a1a"/>
+
+  <!-- ── Title ── -->
+  <text x="380" y="22" text-anchor="middle" font-family="monospace" font-size="13" fill="#cccccc" font-weight="bold">MICROSUN – Wiring Diagram</text>
+  <text x="380" y="37" text-anchor="middle" font-family="monospace" font-size="10" fill="#888888">WS2812B LED strips  ·  Raspberry Pi SPI (GPIO 10)  ·  12 V DC power  ·  604 LEDs</text>
+
+  <!-- ═══════════════════════════════════════
+       RASPBERRY PI (schematic)
+       ═══════════════════════════════════════ -->
+  <rect x="30" y="60" width="140" height="300" rx="6" fill="#1c2e1c" stroke="#44aa44" stroke-width="1.5"/>
+  <text x="100" y="78" text-anchor="middle" font-family="monospace" font-size="10" fill="#88cc88" font-weight="bold">Raspberry Pi</text>
+
+  <!-- GPIO header pin rows (schematic, left side = odd, right side = even) -->
+  <!-- Pin 2  5V -->
+  <rect x="30" y="90" width="18" height="10" rx="2" fill="#cc4444" stroke="#ff6666" stroke-width="0.5"/>
+  <text x="53" y="99" font-family="monospace" font-size="8" fill="#ff8888">Pin 2  5V  ●</text>
+  <!-- Pin 4  5V -->
+  <rect x="30" y="104" width="18" height="10" rx="2" fill="#cc4444" stroke="#ff6666" stroke-width="0.5"/>
+  <text x="53" y="113" font-family="monospace" font-size="8" fill="#ff8888">Pin 4  5V</text>
+  <!-- Pin 6  GND -->
+  <rect x="30" y="118" width="18" height="10" rx="2" fill="#222222" stroke="#666666" stroke-width="0.5"/>
+  <text x="53" y="127" font-family="monospace" font-size="8" fill="#aaaaaa">Pin 6  GND ●</text>
+  <!-- Pin 19  SPI0 MOSI = GPIO 10  (DATA) -->
+  <rect x="30" y="145" width="18" height="10" rx="2" fill="#114411" stroke="#44ff44" stroke-width="1"/>
+  <text x="53" y="154" font-family="monospace" font-size="8" fill="#66ff66">Pin 19  GPIO 10  ●</text>
+  <text x="53" y="163" font-family="monospace" font-size="8" fill="#449944">(SPI0 MOSI, 3.3V)</text>
+
+  <!-- Level shifter warning -->
+  <rect x="33" y="170" width="130" height="48" rx="2" fill="#221100" stroke="#ff8800" stroke-width="1"/>
+  <text x="98" y="181" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#ff8800" font-weight="bold">⚠ LEVEL SHIFTER</text>
+  <text x="98" y="191" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc6600">RPi = 3.3V logic</text>
+  <text x="98" y="201" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc6600">WS2812B needs ≥3.5V</text>
+  <text x="98" y="211" text-anchor="middle" font-family="monospace" font-size="7" fill="#ffaa44">Use 74HCT245/TXS0101</text>
+
+  <!-- ═══════════════════════════════════════
+       5V POWER SUPPLY (schematic)
+       ═══════════════════════════════════════ -->
+  <rect x="30" y="390" width="140" height="80" rx="6" fill="#2a1a00" stroke="#cc6600" stroke-width="1.5"/>
+  <text x="100" y="408" text-anchor="middle" font-family="monospace" font-size="10" fill="#ffaa44" font-weight="bold">12 V Power Supply</text>
+  <text x="100" y="422" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#cc8833">Min. 20 A / 240 W</text>
+  <text x="100" y="435" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#cc8833">(15.1 A max at full white)</text>
+  <rect x="44" y="445" width="20" height="10" rx="2" fill="#cc4444" stroke="#ff6666" stroke-width="0.5"/>
+  <text x="68" y="453" font-family="monospace" font-size="8" fill="#ff8888">+ 12V  ●</text>
+  <rect x="44" y="458" width="20" height="10" rx="2" fill="#222222" stroke="#666666" stroke-width="0.5"/>
+  <text x="68" y="467" font-family="monospace" font-size="8" fill="#aaaaaa">GND  ●</text>
+
+  <!-- ═══════════════════════════════════════
+       WIRE RUNS  (RPi → strips)
+       ═══════════════════════════════════════ -->
+
+  <!-- DATA wire: GPIO 10 → level shifter → first strip DIN -->
+  <path d="M 48 150 L 220 150 L 220 118" stroke="#44ff44" stroke-width="1.5" fill="none" stroke-dasharray="6,3"/>
+  <text x="130" y="145" text-anchor="middle" font-family="monospace" font-size="8" fill="#44aa44">DATA (via level shifter)</text>
+
+  <!-- 12V wire: Power supply → bus bar -->
+  <path d="M 64 450 L 200 450 L 200 500" stroke="#cc4444" stroke-width="1.5" fill="none"/>
+  <text x="145" y="445" font-family="monospace" font-size="8" fill="#cc4444">12 V</text>
+
+  <!-- GND wire: Power supply + RPi → bus bar -->
+  <path d="M 64 463 L 210 463 L 210 520" stroke="#666666" stroke-width="1.5" fill="none"/>
+  <path d="M 48 123 L 215 123 L 215 520" stroke="#666666" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+  <text x="145" y="476" font-family="monospace" font-size="8" fill="#888888">GND</text>
+
+  <!-- ═══════════════════════════════════════
+       LED STRIP CHAIN
+       22 strips in two physical sections
+       ═══════════════════════════════════════ -->
+
+  <!-- ── Section header: UPPER HALF ── -->
+  <rect x="245" y="60" width="480" height="16" rx="3" fill="#2a1a00" stroke="#884400" stroke-width="0.5"/>
+  <text x="485" y="72" text-anchor="middle" font-family="monospace" font-size="9" fill="#cc7733" font-weight="bold">UPPER HALF  (9 strips, pads face inward toward center gap)</text>
+
+  <!-- Strip boxes – upper half (T1 → U6, top to bottom, left to right in chain) -->
+  <!-- Each box: 180px wide, 22px tall, spaced 28px apart vertically -->
+  <!-- Chain starts at T1 DIN (GPIO 10 data line arrives here) -->
+
+  <!-- T1 -->
+  <rect x="245" y="80" width="180" height="20" rx="3" fill="#331111" stroke="#CC0000" stroke-width="1"/>
+  <text x="265" y="91" font-family="monospace" font-size="8" fill="#CC0000" font-weight="bold">T1</text>
+  <text x="310" y="91" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc6666"> 7.5 cm  · 6 segs</text>
+  <text x="415" y="88" font-family="monospace" font-size="7" fill="#666">DIN</text>
+  <text x="420" y="96" font-family="monospace" font-size="7" fill="#555">→</text>
+  <text x="435" y="88" font-family="monospace" font-size="7" fill="#666">DOUT</text>
+
+  <!-- T2 -->
+  <rect x="245" y="106" width="180" height="20" rx="3" fill="#331111" stroke="#D41100" stroke-width="1"/>
+  <text x="265" y="117" font-family="monospace" font-size="8" fill="#D41100" font-weight="bold">T2</text>
+  <text x="310" y="117" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc6666">11.25 cm · 9 segs</text>
+  <line x1="425" y1="100" x2="425" y2="106" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- T3 -->
+  <rect x="245" y="132" width="180" height="20" rx="3" fill="#331111" stroke="#DD2200" stroke-width="1"/>
+  <text x="265" y="143" font-family="monospace" font-size="8" fill="#DD2200" font-weight="bold">T3</text>
+  <text x="310" y="143" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc6666">13.75 cm · 11 segs</text>
+  <line x1="425" y1="126" x2="425" y2="132" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- U1 -->
+  <rect x="245" y="158" width="180" height="20" rx="3" fill="#2a1000" stroke="#EE3300" stroke-width="1"/>
+  <text x="265" y="169" font-family="monospace" font-size="8" fill="#EE3300" font-weight="bold">U1</text>
+  <text x="310" y="169" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc6633">16.25 cm · 13 segs</text>
+  <line x1="425" y1="152" x2="425" y2="158" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- U2 -->
+  <rect x="245" y="184" width="180" height="20" rx="3" fill="#2a1000" stroke="#FF4400" stroke-width="1"/>
+  <text x="265" y="195" font-family="monospace" font-size="8" fill="#FF4400" font-weight="bold">U2</text>
+  <text x="310" y="195" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc6633"> 17.5 cm · 14 segs</text>
+  <line x1="425" y1="178" x2="425" y2="184" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- U3 -->
+  <rect x="245" y="210" width="180" height="20" rx="3" fill="#2a1200" stroke="#FF6600" stroke-width="1"/>
+  <text x="265" y="221" font-family="monospace" font-size="8" fill="#FF6600" font-weight="bold">U3</text>
+  <text x="310" y="221" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc7733">18.75 cm · 15 segs</text>
+  <line x1="425" y1="204" x2="425" y2="210" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- U4 -->
+  <rect x="245" y="236" width="180" height="20" rx="3" fill="#2a1500" stroke="#FF8800" stroke-width="1"/>
+  <text x="265" y="247" font-family="monospace" font-size="8" fill="#FF8800" font-weight="bold">U4</text>
+  <text x="310" y="247" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc8833">   20 cm  · 16 segs</text>
+  <line x1="425" y1="230" x2="425" y2="236" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- U5 -->
+  <rect x="245" y="262" width="180" height="20" rx="3" fill="#2a1800" stroke="#FFAA00" stroke-width="1"/>
+  <text x="265" y="273" font-family="monospace" font-size="8" fill="#FFAA00" font-weight="bold">U5</text>
+  <text x="310" y="273" text-anchor="middle" font-family="monospace" font-size="8" fill="#aa8833">   20 cm  · 16 segs</text>
+  <line x1="425" y1="256" x2="425" y2="262" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- U6 -->
+  <rect x="245" y="288" width="180" height="20" rx="3" fill="#2a1a00" stroke="#FFCC00" stroke-width="1"/>
+  <text x="265" y="299" font-family="monospace" font-size="8" fill="#FFCC00" font-weight="bold">U6</text>
+  <text x="310" y="299" text-anchor="middle" font-family="monospace" font-size="8" fill="#aa9933">21.25 cm · 17 segs</text>
+  <line x1="425" y1="282" x2="425" y2="288" stroke="#44ff44" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- Connecting chain line for upper half -->
+  <line x1="425" y1="80" x2="425" y2="308" stroke="#44ff44" stroke-width="1"/>
+
+  <!-- DIN label at T1 (top) -->
+  <text x="245" y="79" font-family="monospace" font-size="7.5" fill="#44ff44">← DIN (from GPIO 10)</text>
+
+  <!-- ── Connection zone ── -->
+  <rect x="245" y="314" width="480" height="20" rx="3" fill="#1a1a00" stroke="#666633" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <text x="485" y="328" text-anchor="middle" font-family="monospace" font-size="9" fill="#888833">CENTER CONNECTION ZONE  (~8 mm gap) — solder bridging wires, power injection</text>
+
+  <!-- ── Section header: LOWER HALF ── -->
+  <rect x="245" y="340" width="480" height="16" rx="3" fill="#001a2a" stroke="#004488" stroke-width="0.5"/>
+  <text x="485" y="352" text-anchor="middle" font-family="monospace" font-size="9" fill="#4488cc" font-weight="bold">LOWER HALF  (13 strips, pads face inward toward center gap)</text>
+
+  <!-- Strip boxes – lower half (M1 → L9) -->
+
+  <!-- M1 -->
+  <rect x="245" y="360" width="180" height="20" rx="3" fill="#1a1a00" stroke="#FFD700" stroke-width="1"/>
+  <text x="265" y="371" font-family="monospace" font-size="8" fill="#FFD700" font-weight="bold">M1</text>
+  <text x="310" y="371" text-anchor="middle" font-family="monospace" font-size="8" fill="#aa9900">21.25 cm · 17 segs</text>
+  <line x1="510" y1="308" x2="510" y2="360" stroke="#44ff44" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="516" y="337" font-family="monospace" font-size="7.5" fill="#44aa44">bridge</text>
+
+  <!-- M2, M3, M4, L1-L9 as compact list to save space -->
+  <rect x="245" y="384" width="180" height="20" rx="3" fill="#1a1a00" stroke="#FFD700" stroke-width="0.75"/>
+  <text x="265" y="395" font-family="monospace" font-size="8" fill="#FFD700" font-weight="bold">M2</text>
+  <text x="310" y="395" text-anchor="middle" font-family="monospace" font-size="8" fill="#aa9900">21.25 cm · 17 segs</text>
+
+  <rect x="245" y="408" width="180" height="20" rx="3" fill="#1a1a00" stroke="#FFD700" stroke-width="0.75"/>
+  <text x="265" y="419" font-family="monospace" font-size="8" fill="#FFD700" font-weight="bold">M3</text>
+  <text x="310" y="419" text-anchor="middle" font-family="monospace" font-size="8" fill="#aa9900">21.25 cm · 17 segs</text>
+
+  <rect x="245" y="432" width="180" height="20" rx="3" fill="#1a1a00" stroke="#FFD700" stroke-width="0.75"/>
+  <text x="265" y="443" font-family="monospace" font-size="8" fill="#FFD700" font-weight="bold">M4</text>
+  <text x="310" y="443" text-anchor="middle" font-family="monospace" font-size="8" fill="#aa9900">21.25 cm · 17 segs</text>
+
+  <rect x="245" y="456" width="180" height="20" rx="3" fill="#2a1500" stroke="#FFAA00" stroke-width="0.75"/>
+  <text x="265" y="467" font-family="monospace" font-size="8" fill="#FFAA00" font-weight="bold">L1</text>
+  <text x="310" y="467" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc8833">21.25 cm · 17 segs</text>
+
+  <rect x="245" y="480" width="180" height="20" rx="3" fill="#2a1200" stroke="#FF6600" stroke-width="0.75"/>
+  <text x="265" y="491" font-family="monospace" font-size="8" fill="#FF6600" font-weight="bold">L2–L3</text>
+  <text x="310" y="491" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc7733">   20 cm  · 16 segs each</text>
+
+  <rect x="245" y="504" width="180" height="20" rx="3" fill="#2a1000" stroke="#EE3300" stroke-width="0.75"/>
+  <text x="265" y="515" font-family="monospace" font-size="8" fill="#EE3300" font-weight="bold">L4–L6</text>
+  <text x="310" y="515" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc5533">18.75–16.25 cm</text>
+
+  <rect x="245" y="528" width="180" height="20" rx="3" fill="#331111" stroke="#CC0000" stroke-width="0.75"/>
+  <text x="265" y="539" font-family="monospace" font-size="8" fill="#CC0000" font-weight="bold">L7–L9</text>
+  <text x="310" y="539" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc4444">13.75–7.5 cm  · end</text>
+
+  <!-- Chain line lower half -->
+  <line x1="425" y1="360" x2="425" y2="548" stroke="#44ff44" stroke-width="1"/>
+  <line x1="423" y1="378" x2="427" y2="374" stroke="#44ff44" stroke-width="1"/>
+  <line x1="423" y1="402" x2="427" y2="398" stroke="#44ff44" stroke-width="1"/>
+  <line x1="423" y1="426" x2="427" y2="422" stroke="#44ff44" stroke-width="1"/>
+  <line x1="423" y1="450" x2="427" y2="446" stroke="#44ff44" stroke-width="1"/>
+  <line x1="423" y1="474" x2="427" y2="470" stroke="#44ff44" stroke-width="1"/>
+  <line x1="423" y1="498" x2="427" y2="494" stroke="#44ff44" stroke-width="1"/>
+  <line x1="423" y1="522" x2="427" y2="518" stroke="#44ff44" stroke-width="1"/>
+
+  <!-- DOUT end label -->
+  <text x="430" y="553" font-family="monospace" font-size="7.5" fill="#448844">DOUT (end of chain)</text>
+
+  <!-- ═══════════════════════════════════════
+       POWER BUS (right column)
+       ═══════════════════════════════════════ -->
+  <rect x="550" y="60" width="195" height="490" rx="6" fill="#1e1200" stroke="#885500" stroke-width="1"/>
+  <text x="647" y="78" text-anchor="middle" font-family="monospace" font-size="9" fill="#cc8833" font-weight="bold">POWER WIRING</text>
+
+  <!-- 5V bus vertical line -->
+  <line x1="590" y1="90" x2="590" y2="530" stroke="#cc4444" stroke-width="2"/>
+  <text x="594" y="100" font-family="monospace" font-size="8" fill="#cc4444">5V BUS</text>
+
+  <!-- GND bus vertical line -->
+  <line x1="620" y1="90" x2="620" y2="530" stroke="#666666" stroke-width="2"/>
+  <text x="624" y="100" font-family="monospace" font-size="8" fill="#888888">GND BUS</text>
+
+  <!-- Power injection taps – recommend one every 4-5 strips -->
+  <!-- Tap 1: top strips T1-T3 -->
+  <line x1="590" y1="120" x2="560" y2="120" stroke="#cc4444" stroke-width="1"/>
+  <line x1="620" y1="120" x2="560" y2="120" stroke="#666" stroke-width="0" />
+  <line x1="620" y1="125" x2="560" y2="125" stroke="#666666" stroke-width="1"/>
+  <circle cx="555" cy="122" r="3" fill="#cc4444"/>
+  <circle cx="555" cy="125" r="3" fill="#666666"/>
+  <text x="662" y="117" font-family="monospace" font-size="7.5" fill="#cc6633">Inject 12V here</text>
+  <text x="662" y="126" font-family="monospace" font-size="7.5" fill="#cc6633">T1–T3 start</text>
+
+  <!-- Tap 2: mid upper U4-U6 -->
+  <line x1="590" y1="260" x2="560" y2="260" stroke="#cc4444" stroke-width="1"/>
+  <line x1="620" y1="265" x2="560" y2="265" stroke="#666666" stroke-width="1"/>
+  <circle cx="555" cy="262" r="3" fill="#cc4444"/>
+  <circle cx="555" cy="265" r="3" fill="#666666"/>
+  <text x="662" y="258" font-family="monospace" font-size="7.5" fill="#cc6633">Inject 12V here</text>
+  <text x="662" y="267" font-family="monospace" font-size="7.5" fill="#cc6633">U4–U6 (wide strips)</text>
+
+  <!-- Tap 3: center zone M1-M4 -->
+  <line x1="590" y1="400" x2="560" y2="400" stroke="#cc4444" stroke-width="1"/>
+  <line x1="620" y1="405" x2="560" y2="405" stroke="#666666" stroke-width="1"/>
+  <circle cx="555" cy="402" r="3" fill="#cc4444"/>
+  <circle cx="555" cy="405" r="3" fill="#666666"/>
+  <text x="662" y="398" font-family="monospace" font-size="7.5" fill="#cc6633">Inject 12V here</text>
+  <text x="662" y="407" font-family="monospace" font-size="7.5" fill="#cc6633">M1–M4 (equatorial)</text>
+
+  <!-- Tap 4: lower half L4-L9 -->
+  <line x1="590" y1="490" x2="560" y2="490" stroke="#cc4444" stroke-width="1"/>
+  <line x1="620" y1="495" x2="560" y2="495" stroke="#666666" stroke-width="1"/>
+  <circle cx="555" cy="492" r="3" fill="#cc4444"/>
+  <circle cx="555" cy="495" r="3" fill="#666666"/>
+  <text x="662" y="488" font-family="monospace" font-size="7.5" fill="#cc6633">Inject 12V here</text>
+  <text x="662" y="497" font-family="monospace" font-size="7.5" fill="#cc6633">L4–L9 end</text>
+
+  <!-- Power requirements note -->
+  <rect x="555" y="508" width="185" height="44" rx="2" fill="#221100" stroke="#664400" stroke-width="0.5"/>
+  <text x="647" y="520" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc8833">604 LEDs × 0.3W = 181W max</text>
+  <text x="647" y="531" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc8833">181W ÷ 12V = 15.1A max</text>
+  <text x="647" y="542" text-anchor="middle" font-family="monospace" font-size="8" fill="#886633">Typical use: ~40–60W / 3–5A</text>
+  <text x="647" y="551" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#664422">Use 12V / 20A supply + 14AWG main</text>
+
+</svg>
