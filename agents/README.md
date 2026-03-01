@@ -52,6 +52,79 @@ Deliver: ShaderParameters values + description of the visual effect in plain Eng
 
 ---
 
+## Three-Phase Workflow (for software tasks)
+
+> Adapted from [How I Use Claude Code](https://boristane.com/blog/how-i-use-claude-code/) by Boris Tane.
+
+**Never allow code generation until approving a written plan.**
+
+### Phase 1 — Research
+
+Ask the software-engineer to read deeply before touching anything:
+
+```
+@agent software-engineer
+
+Read [file/module/area] deeply and in great detail — understand every intricacy.
+Document your findings in research.md. Do not implement anything yet.
+```
+
+The `research.md` artifact is a reviewable surface. Read it. Verify the agent understands
+the codebase before planning begins. Prevents implementations that ignore existing caching,
+duplicate business logic, or violate ORM conventions.
+
+### Phase 2 — Plan
+
+Once research is verified, ask for a concrete plan:
+
+```
+@agent software-engineer
+
+Based on research.md, write a detailed implementation plan in plan.md.
+Include: explanatory text, code snippets, exact file paths to modify, and trade-off analysis.
+Do not implement yet.
+```
+
+**Annotate the plan directly** — add inline notes into `plan.md`:
+- Reject approaches: "remove this section, we don't need it"
+- Add constraints: "use Gradle task, not raw shell"
+- Redirect structure: "move this to sun-core, not target-rpi"
+
+Repeat the annotation loop 1–6 times with the explicit guard: **"do not implement yet."**
+Without it, implementation begins prematurely.
+
+Once the plan is right, ask for a breakdown:
+
+```
+Add a detailed todo list at the bottom of plan.md — all phases and individual tasks.
+Do not implement yet.
+```
+
+### Phase 3 — Implement
+
+Only after the annotated plan is approved:
+
+```
+Implement it all. When you finish a task or phase, mark it as completed in plan.md.
+Do not stop until all tasks and phases are completed.
+Do not add unnecessary comments. Do not use unknown or unresolved types.
+Continuously run typecheck to catch new issues as you go.
+```
+
+**All creative decisions happen in Phase 2. Phase 3 should be boring.**
+
+### During Implementation
+
+- **Terse corrections work** — full context lives in `plan.md` and session history.
+  Single sentences are enough: "move that to sun-core", "don't change the function signature."
+- **Protect existing interfaces** with hard constraints: "these function signatures must not change."
+- **When direction proves wrong** — discard git changes and restart with reduced scope.
+  Don't patch incrementally; revert and replan.
+- **Run in a single long session** — research, annotation, and implementation in one conversation.
+  `plan.md` persists with full fidelity across auto-compaction.
+
+---
+
 ## How the Team Works Together
 
 The team is **async and task-driven**, not hierarchical. Any agent can be invoked independently. For cross-cutting decisions, run a **council** — invoke multiple agents on the same question and synthesize.
