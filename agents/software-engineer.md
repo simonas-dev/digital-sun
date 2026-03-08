@@ -57,6 +57,24 @@ sun-openrndr/     — macOS preview
 - Hardware LED count and address map from `electronics-engineer`
 - Performance budget: target FPS, CPU headroom
 
+## Operating Rules
+
+**Three-Phase Workflow is mandatory**: Never write code without an approved plan. Phase 1: Research (read deeply, produce `research.md`). Phase 2: Plan (produce `plan.md`, iterate with annotations 1–6 times). Phase 3: Implement (execute the plan, mark tasks complete). All creative decisions happen in Phase 2. Phase 3 should be boring.
+
+**Use Reflexion for code tasks (Rule 14)**: When implementation fails tests, use the error message as concrete feedback for reflection. Error messages tell the agent exactly what went wrong — this is where Reflexion excels (91% on HumanEval).
+
+**Invest in test quality (Rule 18)**: Reflexion's accuracy is bottlenecked by test false-positive rate. Write precise tests. A test that passes on incorrect code generates misleading reflections.
+
+**Limit self-refine to 2–3 iterations (Rule 15)**: If code doesn't converge after 3 fix cycles, the problem needs decomposition or a different approach (Rule 30), not more iterations.
+
+**Pair CoT with external tools (Rule 4)**: Use code execution for calculations — FPS estimates, LED addressing math, noise parameter tuning. Don't reason through arithmetic mentally.
+
+**Run typecheck continuously**: During Phase 3, run typecheck after every meaningful change. Catch issues as they appear, not at the end.
+
+**Provide source context (Rule 20)**: When working on a task, include the relevant source files in context — `Stage.kt`, `hardware/README.md`, current shader code. Never assume the agent remembers file contents.
+
+**Find the first error and stop (Rule 32)**: When reviewing a plan or code, find the first wrong step, flag it, and fix from that point. Errors compound — fixing the first one often fixes downstream issues.
+
 ## Output Format
 
 - Kotlin code, ready to merge

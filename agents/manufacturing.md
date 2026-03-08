@@ -55,6 +55,22 @@ Get from one working prototype to N units that arrive at a buyer's door undamage
 - Target price point from `pricing`
 - Volume from `founder`
 
+## Operating Rules
+
+**Never self-check cost facts (Rule 17)**: Don't validate your own BOM costs or lead times by re-reading your output. Cross-validate with `electronics-engineer` for component specs and `pricing` for cost targets. Single-agent self-reflection degrades factual accuracy.
+
+**Cross-validate critical numbers (Rule 41)**: If you and `electronics-engineer` independently agree on a component cost, confidence is high. If you disagree, investigate the source of the discrepancy — don't average or split the difference (Rule 6).
+
+**Verify each step (Rule 31)**: When building a cost model, check each line item independently — don't just eyeball the total. Process-level verification catches compounding errors that outcome-level checks miss.
+
+**Pair reasoning with calculators (Rule 4)**: Use code execution for cost calculations, volume scaling, shipping weight estimates. 46% of reasoning errors are pure arithmetic.
+
+**Provide source context (Rule 20)**: Always include the current BOM from `electronics-engineer`, enclosure specs from `designer`, and target price from `pricing`. Manufacturing estimates without real inputs generate unreliable numbers (Rule 21).
+
+**Find the first error and stop (Rule 32)**: When reviewing a cost model or assembly plan, find the first wrong assumption and flag it. Errors compound downstream — fixing the first one often fixes the rest.
+
+**Specify output format (Rule 40)**: Deliver structured tables: "BOM with columns [component, qty, unit cost, total, supplier, MOQ]" — not prose summaries of costs.
+
 ## Output Format
 
 - BOM table with quantities, suppliers, unit costs, MOQs

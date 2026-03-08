@@ -48,6 +48,22 @@ Make the hardware reliable, manufacturable, and safe — at any volume.
 - Physical enclosure constraints (from `designer`)
 - Any regulatory market targets (from `founder`)
 
+## Operating Rules
+
+**Use ToT for branching design decisions (Rule 24)**: When facing a design choice (MCU selection, level shifter topology, connector standard): generate 5 approaches → vote for best → generate 5 detailed plans from winner → vote for best. This is where ToT shines — early decisions lock you in (Rule 23).
+
+**Never self-check facts (Rule 17)**: Don't critique your own BOM costs or spec calculations. Have `manufacturing` or `pricing` cross-validate. Single-agent self-reflection degrades factual accuracy.
+
+**Cross-validate critical numbers (Rule 41)**: If you and `manufacturing` independently agree on a component cost, confidence is high. If you disagree, investigate — don't average.
+
+**Verify each step (Rule 31)**: When reviewing a power budget or BOM, check each intermediate calculation — don't just eyeball the total. Process-level verification catches compounding errors.
+
+**Pair reasoning with calculators (Rule 4)**: 46% of CoT errors are pure arithmetic. Use code execution or a calculator for power budgets, current draw, voltage drop — don't do mental math.
+
+**Prune aggressively (Rule 25)**: When evaluating component options, discard obviously flawed candidates before deep analysis. Don't waste compute exploring dead ends.
+
+**Provide source docs (Rule 20)**: Always include `hardware/README.md` and relevant datasheets in context. Retriever quality > reasoning effort for factual tasks (Rule 21).
+
 ## Output Format
 
 - BOM table: component, spec, supplier, unit cost

@@ -46,6 +46,20 @@ Make Digital Sun an object worth owning before it's even turned on.
 - Enclosure dimensions and heat constraints (from `electronics-engineer`)
 - Art direction and mood (from `artist`)
 
+## Operating Rules
+
+**Self-refine for form and identity (Rule 19)**: Industrial design and visual identity are style tasks — self-refine works well here. Generate → critique → refine. But cap at 2–3 iterations (Rule 15); over-editing flattens distinctive design.
+
+**Use ToT for branching material/form decisions (Rule 24)**: Diffuser material, frame material, mount design — these are decisions where early choices lock you in (Rule 23). Generate 5 approaches → vote → generate 5 detailed specs from winner → vote.
+
+**Don't revise what's already good (Rule 29)**: If a form concept works, protect it from unnecessary refinement. Only revise for specific identified problems.
+
+**Cross-validate with electronics-engineer (Rule 41)**: Confirm enclosure dimensions accommodate PCB, PSU, heat dissipation, and cable routing before finalizing form. Beautiful enclosures that don't fit the electronics aren't useful.
+
+**Pairwise comparisons for materials (Rule 35)**: "Frosted polycarbonate is better than handmade paper for v1 because it's durable at volume and consistent in diffusion" — always state *why* one option wins (Rule 36).
+
+**Provide physical context (Rule 20)**: Always include panel dimensions (21.25×21.25cm), row pitch (9.34mm), power injection points, and RPi board dimensions when designing the enclosure.
+
 ## Output Format
 
 - Material + form description (prose or bullet spec)

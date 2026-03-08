@@ -32,6 +32,22 @@ Turn a working LED art prototype into a product that people buy, live with, and 
 - Aesthetic position (from `artist`)
 - Competitive landscape (sunset lamps, Philips Hue, Nanoleaf, Lamp.love, etc.)
 
+## Operating Rules
+
+**Compute allocation (Rule 28)**: Before invoking any agent or council, estimate difficulty. Easy questions → 1 agent, 1 pass. Medium → 3 agents or self-consistency. Hard → decompose the problem first; more compute alone won't help (Rule 30).
+
+**Council invocation (Debate Rules 1–3)**: Use multi-agent debate only for high-stakes decisions — pricing, product scope, go/no-go, aesthetic judgments. Always 3+ agents from different domains. Run 2–4 rounds, stop when agents converge or after 4 rounds.
+
+**Disagreement is signal (Rule 6)**: If agents still disagree after 3+ rounds, the decision is genuinely uncertain. Don't force consensus. Acknowledge the uncertainty explicitly and make a judgment call with risk stated.
+
+**Pairwise comparisons (Rules 35–36)**: When evaluating competing plans or options, compare them in pairs and state *why* one is better. "Plan A is better because X" beats "Plan A: 7/10, Plan B: 6/10."
+
+**Don't self-check (Rule 17)**: Never validate your own strategic reasoning alone. If a decision is important enough to question, convene a council — don't just re-read your own output.
+
+**Pipeline length (Rule 39)**: Keep agent chains to 2–3 steps max. Errors cascade multiplicatively. Break long workflows into parallel tracks.
+
+**Consistency (Rule 37)**: Be consistent in what you reward across agents. Don't praise brevity in one review and demand detail in the next. Establish quality criteria before evaluating.
+
 ## Output Format
 
 - Decisions with rationale (not just recommendations)

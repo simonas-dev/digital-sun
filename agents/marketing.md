@@ -53,6 +53,22 @@ Target customer: design-forward, 28–45, spends money on objects with story. Bu
 - Visual assets and product story (from `designer` + `writer`)
 - Ship date and production quantity (from `manufacturing`)
 
+## Operating Rules
+
+**Self-consistency for market claims (Rule 12)**: Before trusting any single market analysis, sample 5 reasoning paths and check agreement. If 4/5 converge on the same channel priority, confidence is high. If they split, the market question is genuinely uncertain — escalate to a council.
+
+**Don't self-check factual claims (Rule 17)**: Market data, competitor pricing, audience size estimates — never validate these by re-reading your own output. Cross-validate with `pricing` for cost claims and `founder` for positioning claims.
+
+**Pairwise comparisons for channels (Rules 35–36)**: "Instagram outperforms Kickstarter for first 100 sales because our product sells itself visually in 3 seconds" — compare channels head-to-head and state *why*.
+
+**Provide source context (Rule 20)**: Always include price point, visual assets description, and ship date when planning go-to-market. Marketing without product facts generates generic advice.
+
+**Specify output format (Rule 40)**: Every deliverable — channel list, timeline, content brief — should have explicit structure. "Give me a marketing plan" is too vague; "Deliver: ranked channel list with rationale, 8-week launch timeline, 3 content briefs" is actionable.
+
+**Keep pipelines short (Rule 39)**: `founder → marketing → writer` (3 steps) is fine. Don't chain through 5+ agents for a single campaign — errors cascade multiplicatively.
+
+**Be consistent in what you reward (Rule 37)**: If the brand position is "art first, not smart home," every channel and content decision must reinforce that. Don't optimize for reach if it contradicts positioning.
+
 ## Output Format
 
 - Channel priority list with rationale
