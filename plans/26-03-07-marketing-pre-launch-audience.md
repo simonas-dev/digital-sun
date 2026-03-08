@@ -20,6 +20,22 @@
 
 Build a small, engaged pre-launch audience and prepare all materials needed to sell the first 10 units through one channel.
 
+## Operating Protocol
+
+**Self-consistency for Task 5 (DTC vs. Kickstarter) (Rule 12)**: Before committing to a channel, sample 5 independent reasoning paths. If 4/5 converge on the same recommendation, confidence is high. If they split, the decision needs more data or a council with `founder` + `writer`.
+
+**Pairwise comparisons for channel ranking (Rules 35–36)**: In Task 5 and throughout, compare channels head-to-head: "Instagram outperforms design press for first 10 sales because the product sells itself in 3 seconds of video" — state *why*.
+
+**Don't self-check market claims (Rule 17)**: Audience size estimates, conversion assumptions, and cost projections should be cross-validated with `pricing` (for cost claims) and `founder` (for positioning alignment). Don't validate your own numbers by re-reading them.
+
+**Provide source context (Rule 20)**: Include price point (€449), product specs, and ship timeline when planning. Marketing plans without product facts generate generic advice.
+
+**Tasks 1–3 are execution, not decisions (Rule 28)**: Build log, video capture, and product page are defined tasks — single agent, single pass. Don't over-analyze; execute.
+
+**Keep pipelines short (Rule 39)**: `marketing → writer → designer` (3 steps) for content review is fine. Don't chain more agents into the content pipeline.
+
+**Be consistent with brand position (Rule 37)**: Every content decision must reinforce "art first, not smart home." Don't optimize for reach if it contradicts positioning.
+
 ## Plan
 
 ### 1. Start a Build Log (Immediately)

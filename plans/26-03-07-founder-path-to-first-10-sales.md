@@ -20,6 +20,18 @@
 
 Define the v1 product scope and path to first 10 sales within 6 months, validating that Digital Sun has a market as an art object before scaling.
 
+## Operating Protocol
+
+**Council for Task 2 (pricing)**: Invoke `pricing` + `manufacturing` + `founder` as a 3-agent council (Debate Rules 2–3). Cross-validate COGS independently before debating price (Rule 41). Run 2 rounds minimum. If agents disagree after 3 rounds, escalate with stated uncertainty (Rule 6).
+
+**Council for Task 3 (channel)**: Invoke `marketing` + `founder` + `writer` — channels, positioning, and voice must align. Use pairwise comparisons (Rule 35): "DTC is better than Kickstarter because X" — state *why* (Rule 36).
+
+**Self-consistency for Task 1 (scope)**: Before locking v1 scope, sample 5 independent reasoning paths about what to include/exclude (Rule 12). If 4/5 agree, lock it. If they split, the scope question needs more data.
+
+**No council for Task 4–5**: Building audience and selling the first unit are execution, not decisions. Single agent, single pass.
+
+**Don't self-check (Rule 17)**: Don't validate your own pricing philosophy or scope decisions alone. The council exists for this.
+
 ## Plan
 
 ### 1. Define v1 Product Scope

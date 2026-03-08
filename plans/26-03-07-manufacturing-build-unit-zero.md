@@ -20,6 +20,22 @@
 
 Build the first unit end-to-end, document the assembly process, and produce a validated cost model at 10-unit and 50-unit scale.
 
+## Operating Protocol
+
+**Cross-validate BOM with electronics-engineer (Rule 41)**: For Task 3 (lock BOM), independently price the same components that `electronics-engineer` documented. If costs agree, confidence is high. If they disagree, investigate the source — don't average or split the difference (Rule 6).
+
+**Pair reasoning with calculators (Rule 4)**: For Task 5 (cost modeling), use code execution for all arithmetic — volume scaling, per-unit cost breakdowns, labor rate calculations. 46% of reasoning errors are pure arithmetic.
+
+**Verify each cost line (Rule 31)**: When building the cost model, check each line item independently. Don't just eyeball the total. Process-level verification catches compounding errors that outcome-level checks miss.
+
+**Find the first error and stop (Rule 32)**: When reviewing the assembly process or cost model, find the first wrong assumption and flag it. Errors compound downstream — fixing the first one often fixes the rest.
+
+**Never self-check cost facts (Rule 17)**: Don't validate your own cost estimates by re-reading them. Have `pricing` cross-validate the final cost model. Have `electronics-engineer` verify component specs.
+
+**Structured output (Rule 40)**: Deliver BOM as structured tables with explicit columns: [component, spec, qty, unit cost, line total, supplier, MOQ, lead time]. Assembly steps as numbered lists with time estimates per step.
+
+**Tasks 1–2 are execution (Rule 28)**: Building and documenting Unit Zero is hands-on work, not a decision — single agent, single pass. The learning comes from doing, not from deliberation.
+
 ## Plan
 
 ### 1. Build Unit Zero

@@ -19,6 +19,20 @@
 
 Prepare one shader ("Golden Dusk") as the definitive v1 artwork — tuned, named, and documented — and write the artist statement that frames Digital Sun as a practice.
 
+## Operating Protocol
+
+**Self-refine for Tasks 2, 3, 4 (tuning, statement, naming)**: These are aesthetic/style tasks — self-refine excels here (Rule 19). Generate → critique → refine. But cap at 2–3 iterations per deliverable (Rule 15). Beyond that, you over-edit and lose the original spark.
+
+**Don't revise what works (Rule 29)**: If a parameter set or name feels right after observation, protect it. 38% of correct outputs degrade under aggressive revision. Only refine for specific identified weaknesses.
+
+**Cross-validate Task 2 with software-engineer (Rule 41)**: Before finalizing ShaderParameters, confirm FPS on RPi Zero 2W. Aesthetic intent that can't run at 30fps needs rethinking. Include current parameter values and display geometry in context (Rule 20).
+
+**Don't use ToT for Tasks 3–5 (Rule 27)**: Artist statement, naming, and palette definition are open-ended creative work — linear exploration and self-refine are better than branching search.
+
+**Reasoning before judgment (Rule 3)**: When evaluating whether a parameter change improves the work, write *why* it works or doesn't before stating the verdict. The reasoning scaffolds the judgment.
+
+**Don't self-check facts (Rule 17)**: If the statement claims "604 LEDs" or specific technical details, have `software-engineer` verify. You're optimized for voice, not technical accuracy.
+
 ## Plan
 
 ### 1. See the Work on Hardware

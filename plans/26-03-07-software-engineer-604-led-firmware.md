@@ -20,6 +20,24 @@
 
 Get the firmware running correctly on 604 LEDs so the artist can see and tune "Golden Dusk" on physical hardware.
 
+## Operating Protocol
+
+**Three-phase workflow is mandatory**: Each task below must follow Research → Plan → Implement. No code generation until a written plan is approved. Document research in `research.md`, plan in `plan.md`, iterate annotations 1–6 times with explicit "do not implement yet" guard. Phase 3 should be boring.
+
+**Reflexion for Tasks 1–2 (Rule 14)**: Stage.kt and test pattern have concrete feedback signals — compile errors, test output, visual verification. When implementation fails, use the error message as reflection input. This is where Reflexion excels.
+
+**Continuous typecheck**: During implementation of any task, run typecheck after every meaningful change. Catch issues as they appear, not at the end.
+
+**Pair reasoning with calculators (Rule 4)**: For Task 1 (LED addressing math), use code execution to calculate row offsets, pixel coordinates, and index mapping. Don't reason through coordinate arithmetic mentally.
+
+**Provide source context (Rule 20)**: Include `hardware/README.md`, current `Stage.kt`, and `Main.kt` in context when working. Never assume the agent remembers file contents.
+
+**Cap iterations (Rule 15)**: If a task doesn't converge after 3 fix cycles, decompose the problem or try a different approach (Rule 30). Don't iterate endlessly.
+
+**Find the first error (Rule 32)**: When reviewing Stage.kt output, find the first wrong pixel coordinate and fix from that point. Errors compound — fixing the first one often fixes downstream issues.
+
+**Self-refine is NOT appropriate for Task 4 (noise) (Rule 17)**: Whether OPENRNDR and RPi noise match is a factual question. Have `artist` evaluate visually on both platforms — don't self-assess parity.
+
 ## Plan
 
 ### 1. Update Stage.kt to 604 LEDs

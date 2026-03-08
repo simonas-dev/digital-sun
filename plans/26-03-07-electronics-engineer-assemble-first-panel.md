@@ -20,6 +20,22 @@
 
 Assemble the first working 604-LED panel with reliable signal integrity, confirming the electrical design before any enclosure or production decisions.
 
+## Operating Protocol
+
+**ToT for Task 1 (level shifter selection) (Rule 24)**: This is a branching design decision where early choices lock you in. Generate 5 level shifter approaches → vote for best → generate 5 detailed implementation plans from winner → vote for best. Prune obviously flawed options early (Rule 25).
+
+**Pair reasoning with calculators (Rule 4)**: For Task 3 (power validation) — use code execution for voltage drop calculations, current draw per injection zone, wire gauge adequacy. Don't do mental math on power budgets.
+
+**Cross-validate Task 4 (BOM) with manufacturing (Rule 41)**: After documenting the BOM, have `manufacturing` independently price the same components. If costs agree, confidence is high. If they disagree, investigate — don't average (Rule 6).
+
+**Verify each measurement step (Rule 31)**: During Task 3, check each intermediate measurement independently — voltage at each injection point, current at each segment — don't just eyeball the total system.
+
+**Provide source docs (Rule 20)**: Include `hardware/README.md` and strip datasheets when working on Tasks 2–3. Never rely on recall for LED counts, row widths, or wiring order.
+
+**ToT for Task 5 (MCU evaluation) (Rule 24)**: Generate 5 MCU candidates → evaluate against criteria → select top 2 for detailed comparison. This is research only — no commitment needed for v1.
+
+**Never self-check cost facts (Rule 17)**: Don't validate your own BOM costs. Let `manufacturing` and `pricing` cross-check.
+
 ## Plan
 
 ### 1. Solve the Level Shifter

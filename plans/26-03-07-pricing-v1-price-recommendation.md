@@ -7,6 +7,24 @@
 
 ---
 
+## Operating Protocol
+
+**Self-consistency for price recommendation (Rule 12)**: The €449 recommendation should be validated by sampling 5 independent reasoning paths about the optimal price point. If 4/5 converge on €449, confidence is high. If they split across ranges, the pricing question needs more data or a council.
+
+**Cross-validate COGS with manufacturing (Rule 41)**: The €232 parts COGS must be independently confirmed by `manufacturing`. If both agents arrive at the same number, confidence is high. If they disagree, investigate — don't average (Rule 6).
+
+**Pair all arithmetic with calculators (Rule 4)**: Every calculation in Sections 2, 6, and 7 (unit economics, revenue scenarios, break-even) must use code execution, not mental math. 46% of reasoning errors are pure arithmetic.
+
+**Verify each step (Rule 31)**: Check each line item in the BOM and each step in the margin calculation independently. Don't just eyeball totals.
+
+**Never self-refine pricing numbers (Rule 19)**: This is a factual accuracy domain. Don't critique your own calculations. Have `manufacturing` verify COGS and `founder` evaluate the strategic positioning.
+
+**Pairwise comparisons for edition strategy (Rules 35–36)**: Section 5 correctly uses pairwise comparison (limited vs. open). Continue this pattern for any future pricing variants — state *why* one option wins.
+
+**Don't push a single metric (Rule 38)**: The recommendation correctly balances margin, brand positioning, and market risk. Maintain this multi-dimensional evaluation — don't optimize purely for margin or volume.
+
+---
+
 ## Current State Assessment
 
 - **COGS now grounded in real parts**: Key components priced from actual suppliers

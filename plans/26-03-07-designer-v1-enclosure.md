@@ -20,6 +20,20 @@
 
 Design and prototype a v1 enclosure that makes the panel look like an art object when off and a living painting when on — buildable by hand at 10-unit scale.
 
+## Operating Protocol
+
+**ToT for Task 1 (diffuser selection) (Rule 24)**: This is a branching design decision where early choices lock you in — the diffuser defines the product's appearance. Generate 5 diffuser approaches → vote for best → test top 2–3 physically. Prune obviously flawed options before committing to physical samples (Rule 25).
+
+**Pairwise comparisons for material decisions (Rules 35–36)**: "Frosted polycarbonate is better than washi paper for v1 because it's durable at volume and consistent in diffusion" — always state *why* one wins. Don't rate materials on an absolute scale.
+
+**Self-refine for Tasks 2, 4 (frame, identity) (Rule 19)**: Frame design and visual identity are style tasks — generate → critique → refine. Cap at 2–3 iterations (Rule 15). Don't over-edit.
+
+**Cross-validate with electronics-engineer (Rule 41)**: Before finalizing frame dimensions, confirm that the enclosure accommodates PCB, PSU connection, level shifter, cable routing, and heat dissipation. Include panel dimensions (21.25×21.25cm), row pitch (9.34mm), and electronics depth in context (Rule 20).
+
+**Cross-validate diffuser with artist (Rule 41)**: The artist must evaluate each diffuser candidate against shader output. If `designer` and `artist` independently agree on a material, confidence is high.
+
+**Don't revise what works (Rule 29)**: If a frame concept or material choice works after testing, protect it from unnecessary refinement. Only revise for specific identified problems.
+
 ## Plan
 
 ### 1. Test Diffuser Materials

@@ -7,6 +7,23 @@
 
 ---
 
+## Operating Protocol
+
+**Compute allocation (Rule 28)**: Most Phase 1–2 tasks are routine execution — single agent, single pass. Phase 4 pricing and Phase 5 go/no-go are high-stakes decisions that warrant council debate.
+
+**Council required for**:
+- **Price decision** (Phase 4): `pricing` + `manufacturing` + `founder` — 3 agents, 2 rounds minimum (Debate Rules 2–3). Cross-validate COGS independently (Rule 41).
+- **Launch readiness / go/no-go** (Phase 5): `founder` + `marketing` + `artist` — is the product ready for a stranger to buy?
+- **Diffuser selection** (Phase 3): `designer` + `artist` + `electronics-engineer` — aesthetic × feasibility × thermal.
+
+**No council needed for**: Stage.kt fix, test pattern, level shifter, build log, frame design, assembly docs — these are defined execution tasks (Rule 28: easy → 1 agent, 1 pass).
+
+**Disagreement protocol (Rule 6)**: If agents disagree after 3 rounds on pricing or scope, flag explicitly as uncertain and make a judgment call with stated risk. Don't force consensus or split the difference.
+
+**Pipeline discipline (Rule 39)**: The critical path is already structured as 2–3 agent handoffs per phase. Don't add intermediate agents to existing chains.
+
+---
+
 ## Where We Are
 
 We have a fully specified hardware design and working firmware — on screen. Nothing physical exists yet. No panel, no enclosure, no customer, no public presence. The entire project sits at the threshold between "documented idea" and "real object in someone's hands."
