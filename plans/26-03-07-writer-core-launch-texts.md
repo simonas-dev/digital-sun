@@ -18,22 +18,6 @@
 
 Produce the four core texts needed for launch: artist statement, product page, packaging insert, and press pitch — all in final, ready-to-use form.
 
-## Operating Protocol
-
-**Self-refine is the primary technique for all tasks (Rule 19)**: Writing is the canonical style task. Generate → critique → refine for each deliverable. Cap at 2–3 iterations per piece (Rule 15) — beyond that, over-editing flattens distinctive voice.
-
-**Actionable self-feedback (Rule 18 ablation)**: When critiquing your own draft, be specific: "the second sentence buries the verb" or "the opening is abstract, needs a concrete image." Generic feedback ("make it better") degrades quality vs. no feedback at all.
-
-**Don't revise what lands (Rule 29)**: If a sentence or paragraph works after the first pass, leave it. 38% of correct outputs degrade under revision. Only refine specific identified weaknesses.
-
-**Don't fact-check your own copy (Rule 17)**: If the text claims "604 LEDs," "made in Lithuania," or specific technical details, have `software-engineer` or `manufacturing` verify. You're optimized for voice, not accuracy.
-
-**Reasoning before choosing between options (Rules 3, 36)**: When choosing between two headline options or phrasings, explain *why* one is stronger before stating the choice.
-
-**Provide source context (Rule 20)**: Include artist intent (from `artist`), product specs, target audience description, and price point when writing. Copy without inputs produces generic prose.
-
-**Task 5 (voice editing) is ongoing, not self-refine**: When editing other agents' copy, you're the external critic — this is cross-agent review (Rule 17 positive case), not self-reflection.
-
 ## Plan
 
 ### 1. Write the Artist Statement
@@ -50,6 +34,8 @@ The foundational text. Everything else derives from this.
 - State the practice (generative art as lamp, not lamp as feature)
 - Ground it in the specific (Perlin noise, WS2812B, 604 pixels — but in human language)
 - Close with what the viewer/buyer experiences
+- When self-critiquing drafts, be specific ("the second sentence buries the verb") — generic feedback ("make it better") degrades quality
+- Have `software-engineer` verify any technical claims before finalizing
 
 ### 2. Write the Product Page Copy
 

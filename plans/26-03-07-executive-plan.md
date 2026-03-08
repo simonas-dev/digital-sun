@@ -7,23 +7,6 @@
 
 ---
 
-## Operating Protocol
-
-**Compute allocation (Rule 28)**: Most Phase 1–2 tasks are routine execution — single agent, single pass. Phase 4 pricing and Phase 5 go/no-go are high-stakes decisions that warrant council debate.
-
-**Council required for**:
-- **Price decision** (Phase 4): `pricing` + `manufacturing` + `founder` — 3 agents, 2 rounds minimum (Debate Rules 2–3). Cross-validate COGS independently (Rule 41).
-- **Launch readiness / go/no-go** (Phase 5): `founder` + `marketing` + `artist` — is the product ready for a stranger to buy?
-- **Diffuser selection** (Phase 3): `designer` + `artist` + `electronics-engineer` — aesthetic × feasibility × thermal.
-
-**No council needed for**: Stage.kt fix, test pattern, level shifter, build log, frame design, assembly docs — these are defined execution tasks (Rule 28: easy → 1 agent, 1 pass).
-
-**Disagreement protocol (Rule 6)**: If agents disagree after 3 rounds on pricing or scope, flag explicitly as uncertain and make a judgment call with stated risk. Don't force consensus or split the difference.
-
-**Pipeline discipline (Rule 39)**: The critical path is already structured as 2–3 agent handoffs per phase. Don't add intermediate agents to existing chains.
-
----
-
 ## Where We Are
 
 We have a fully specified hardware design and working firmware — on screen. Nothing physical exists yet. No panel, no enclosure, no customer, no public presence. The entire project sits at the threshold between "documented idea" and "real object in someone's hands."
@@ -63,7 +46,7 @@ These three workstreams have zero dependencies and must begin now:
 
 | Task | Agent | Why Critical |
 |------|-------|-------------|
-| Test diffuser materials | Designer | The diffuser determines whether this looks like art or a circuit board. Test 3 candidates at 3 standoff distances. This is the most consequential design decision for v1. |
+| Test diffuser materials | Designer | The diffuser determines whether this looks like art or a circuit board. Test 3 candidates at 3 standoff distances. This is the most consequential design decision for v1. **Council**: `designer` + `artist` + `electronics-engineer` evaluate together — aesthetic × feasibility × thermal. |
 | Tune "Golden Dusk" for hardware | Artist | Adjust hue range, noise scale, brightness floor, and temporal speed based on how light behaves through the chosen diffuser on real LEDs. The shader that looks right on screen will not look right on hardware. |
 | Design the frame | Designer | Minimal enclosure: holds panel + diffuser + electronics, mounts on wall, hides cables from front view. For v1 prototype, 3D-printed matte black PLA is acceptable. |
 | Add SHADER env var | Software Engineer | Eliminates redeploy cycle. Needed for artist tuning sessions and for QA test pattern. |
@@ -78,7 +61,7 @@ These three workstreams have zero dependencies and must begin now:
 | Build Unit Zero (timed) | Manufacturing | Assemble one complete unit end-to-end while tracking time per step, tools needed, and pain points. This is the source of truth for labor cost. |
 | Validate and lock BOM | Manufacturing | Combine electronics BOM + enclosure materials + consumables. No "TBD" entries. |
 | Build unit economics model | Pricing | Calculate true per-unit cost including parts, labor, packaging, processing, shipping, and returns. |
-| Recommend a price | Pricing | One number, not a range. Must achieve >40% gross margin and feel credible for the "art object" category. |
+| Recommend a price | Pricing | One number, not a range. Must achieve >40% gross margin and feel credible for the "art object" category. **Council**: `pricing` + `manufacturing` + `founder` cross-validate COGS independently before debating price — 2 rounds minimum. |
 | Write artist statement | Writer | The foundational text — everything else (product page, press pitch, packaging) derives from this. Must be written after the artist has seen the physical piece. |
 
 **Phase 4 exit criteria**: Price is set. COGS is known to ±10%. Artist statement is written. Assembly process is documented.
@@ -91,7 +74,7 @@ These three workstreams have zero dependencies and must begin now:
 | Write product page copy | Writer | Headline + 80 words. A stranger reads it and understands what the object is, what it does, and why it costs what it costs. |
 | Build product page | Marketing | One page: video, description, price, buy button. Shopify single-product or Big Cartel. Mobile-first. |
 | Define QA process | Manufacturing | 10-point checklist, <15 minutes per unit. Every unit passes before shipping. |
-| First sale | Founder | Sell one unit to a real buyer. Ship it. Get feedback. Validate the entire chain. |
+| First sale | Founder | Sell one unit to a real buyer. Ship it. Get feedback. Validate the entire chain. **Council before launch**: `founder` + `marketing` + `artist` — is the product ready for a stranger to buy? |
 
 **Phase 5 exit criteria**: First unit sold, shipped, received, and buyer provides feedback.
 

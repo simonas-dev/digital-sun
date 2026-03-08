@@ -20,18 +20,6 @@
 
 Define the v1 product scope and path to first 10 sales within 6 months, validating that Digital Sun has a market as an art object before scaling.
 
-## Operating Protocol
-
-**Council for Task 2 (pricing)**: Invoke `pricing` + `manufacturing` + `founder` as a 3-agent council (Debate Rules 2–3). Cross-validate COGS independently before debating price (Rule 41). Run 2 rounds minimum. If agents disagree after 3 rounds, escalate with stated uncertainty (Rule 6).
-
-**Council for Task 3 (channel)**: Invoke `marketing` + `founder` + `writer` — channels, positioning, and voice must align. Use pairwise comparisons (Rule 35): "DTC is better than Kickstarter because X" — state *why* (Rule 36).
-
-**Self-consistency for Task 1 (scope)**: Before locking v1 scope, sample 5 independent reasoning paths about what to include/exclude (Rule 12). If 4/5 agree, lock it. If they split, the scope question needs more data.
-
-**No council for Task 4–5**: Building audience and selling the first unit are execution, not decisions. Single agent, single pass.
-
-**Don't self-check (Rule 17)**: Don't validate your own pricing philosophy or scope decisions alone. The council exists for this.
-
 ## Plan
 
 ### 1. Define v1 Product Scope
@@ -58,6 +46,7 @@ Decide retail price and edition size based on confirmed COGS.
 - **Deliverable**: Pricing decision with rationale
 - **Success Criteria**: Unit economics show >40% gross margin; price feels credible for the category
 - **Dependencies**: Final COGS from `manufacturing` + `pricing`; positioning review from `marketing`
+- **Method**: Council — `pricing` + `manufacturing` + `founder`. Cross-validate COGS independently before debating price. 2 rounds minimum. If agents still disagree after 3 rounds, make a judgment call with stated uncertainty.
 - **Priority**: High — blocks launch planning
 
 ### 3. Choose Go-to-Market Channel
@@ -67,6 +56,7 @@ Pick one primary channel for first 10 sales. Don't spread thin.
 - **Deliverable**: Channel decision (DTC site / Kickstarter / gallery consignment / local market)
 - **Success Criteria**: Channel chosen with <$500 setup cost and <4 weeks to first listing
 - **Dependencies**: Product photography/video (needs physical unit), copy from `writer`
+- **Method**: Council — `marketing` + `founder` + `writer`. Compare channels head-to-head: "DTC is better than Kickstarter because X."
 - **Priority**: High — but sequential after pricing
 
 ### 4. Build a Pre-Launch Audience

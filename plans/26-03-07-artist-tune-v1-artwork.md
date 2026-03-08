@@ -19,20 +19,6 @@
 
 Prepare one shader ("Golden Dusk") as the definitive v1 artwork — tuned, named, and documented — and write the artist statement that frames Digital Sun as a practice.
 
-## Operating Protocol
-
-**Self-refine for Tasks 2, 3, 4 (tuning, statement, naming)**: These are aesthetic/style tasks — self-refine excels here (Rule 19). Generate → critique → refine. But cap at 2–3 iterations per deliverable (Rule 15). Beyond that, you over-edit and lose the original spark.
-
-**Don't revise what works (Rule 29)**: If a parameter set or name feels right after observation, protect it. 38% of correct outputs degrade under aggressive revision. Only refine for specific identified weaknesses.
-
-**Cross-validate Task 2 with software-engineer (Rule 41)**: Before finalizing ShaderParameters, confirm FPS on RPi Zero 2W. Aesthetic intent that can't run at 30fps needs rethinking. Include current parameter values and display geometry in context (Rule 20).
-
-**Don't use ToT for Tasks 3–5 (Rule 27)**: Artist statement, naming, and palette definition are open-ended creative work — linear exploration and self-refine are better than branching search.
-
-**Reasoning before judgment (Rule 3)**: When evaluating whether a parameter change improves the work, write *why* it works or doesn't before stating the verdict. The reasoning scaffolds the judgment.
-
-**Don't self-check facts (Rule 17)**: If the statement claims "604 LEDs" or specific technical details, have `software-engineer` verify. You're optimized for voice, not technical accuracy.
-
 ## Plan
 
 ### 1. See the Work on Hardware
@@ -51,6 +37,7 @@ Adjust shader parameters based on how the light actually behaves through the dif
 - **Deliverable**: Updated `ShaderParameters` values for v1
 - **Success Criteria**: The light feels like "the last 20 minutes of daylight" — warm, slow, alive, never repeating. No visible pixel grid through diffuser. No jarring brightness spikes.
 - **Dependencies**: Diffuser material chosen (with `designer`); hardware assembled
+- **Validation**: Before finalizing parameters, have `software-engineer` confirm ≥30fps on RPi Zero 2W. Aesthetic intent that can't run smoothly needs rethinking.
 - **Priority**: Critical — this is the product
 
 **Parameters to evaluate**:
@@ -66,6 +53,7 @@ Define what Digital Sun is as an art practice — not a product description, but
 - **Deliverable**: Artist statement (150-250 words)
 - **Success Criteria**: Statement answers: why light as medium, what "digital nature" means, what this work is about. Reads as authored, not generated. Could hang on a gallery wall.
 - **Dependencies**: Having seen the work on hardware (Task 1)
+- **Validation**: Have `software-engineer` verify any technical claims (LED count, materials). Have `writer` do a voice pass.
 - **Priority**: High — needed for product page, press, packaging
 
 ### 4. Name the v1 Edition
