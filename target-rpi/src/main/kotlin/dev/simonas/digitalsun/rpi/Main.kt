@@ -23,7 +23,7 @@ fun start() {
     val stage = Stage()
     val pixels = stage.getPixels()
     val ledCount = pixels.size
-    val gpioPin = 10
+    val gpioPin = 18
 
     println("Initializing $ledCount LEDs on GPIO $gpioPin...")
 
