@@ -4,8 +4,8 @@
 set -e
 
 # Configuration
-RPI_HOST="${RPI_HOST:-raspberrypi.local}"
-RPI_USER="${RPI_USER:-simonas}"
+RPI_HOST="${RPI_HOST:-192.168.0.209}"
+RPI_USER="${RPI_USER:-microsun}"
 RPI_DIR="${RPI_DIR:-~/digital-sun/target-rpi}"
 
 echo "============================================"
