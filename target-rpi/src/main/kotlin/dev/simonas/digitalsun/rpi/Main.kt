@@ -1,7 +1,7 @@
 package dev.simonas.digitalsun.rpi
 
 import dev.simonas.digitalsun.core.ShaderParameters
-import dev.simonas.digitalsun.core.Stage
+import dev.simonas.digitalsun.core.Stages
 import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
 import dev.simonas.digitalsun.core.WarmColorShaderAlgorithm
 import kotlinx.coroutines.*
@@ -20,10 +20,12 @@ fun start() {
     println("Digital Sun - RPI LED Control")
     println("==============================")
 
-    val stage = Stage()
-    val pixels = stage.getPixels()
+    val hw = HardwareProfiles.hwForStage(Stages.fromEnv())
+    println("Hardware profile: ${hw.name}")
+
+    val pixels = hw.wiring(hw.stage.getPixels())
     val ledCount = pixels.size
-    val gpioPin = 18
+    val gpioPin = hw.gpioPin
 
     println("Initializing $ledCount LEDs on GPIO $gpioPin...")
 

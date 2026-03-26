@@ -1,6 +1,6 @@
 package dev.simonas.digitalsun.openrndr
 
-import dev.simonas.digitalsun.core.Stage
+import dev.simonas.digitalsun.core.Stages
 import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
@@ -18,7 +18,7 @@ fun main() = application {
     }
 
     program {
-        val stage = Stage()
+        val stage = Stages.fromEnv()
 
         // Create core shader with OPENRNDR noise generator
         val noiseGenerator = OpenrndrNoiseGenerator()
