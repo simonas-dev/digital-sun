@@ -8,7 +8,7 @@ import org.openrndr.color.ColorRGBa
 /**
  * OPENRNDR-specific pixel shader that wraps a core PixelShader
  */
-class OpenrndrPixelShader(private val coreShader: PixelShader) {
+class OpenrndrPixelShader(var coreShader: PixelShader) {
 
     fun shade(x: Int, y: Int, t: Double, params: Parameters): ColorRGBa {
         val coreParams = params.toShaderParameters()
