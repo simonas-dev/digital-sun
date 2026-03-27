@@ -98,7 +98,10 @@ object Stages {
     private fun createStage(block: MutableList<Pixel>.() -> Unit): Stage {
         val pixels = mutableListOf<Pixel>()
         pixels.block()
-        return Stage(pixels)
+        // Normalize: center coordinates at origin
+        val midX = (pixels.minOf { it.x } + pixels.maxOf { it.x }) / 2
+        val midY = (pixels.minOf { it.y } + pixels.maxOf { it.y }) / 2
+        return Stage(pixels.map { Pixel(it.x - midX, it.y - midY) })
     }
 
 private fun MutableList<Pixel>.addRow(y: Int, fromX: Int, toX: Int) {

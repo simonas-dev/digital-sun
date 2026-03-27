@@ -1,7 +1,9 @@
 package dev.simonas.digitalsun.openrndr
 
 import dev.simonas.digitalsun.core.Stages
+import dev.simonas.digitalsun.core.StartupShaderAlgorithm
 import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
+import dev.simonas.digitalsun.core.WarmColorShaderAlgorithm
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
 import org.openrndr.draw.Drawer
@@ -19,10 +21,21 @@ fun main() = application {
 
     program {
         val stage = Stages.fromEnv()
+        val pixels = stage.getPixels()
+        val stageWidth = (pixels.maxOf { it.x } - pixels.minOf { it.x } + 1) * P_SIZE
+        val stageHeight = (pixels.maxOf { it.y } - pixels.minOf { it.y } + 1) * P_SIZE
+        val drawOffsetX = ((width - stageWidth) / 2 / P_SIZE).toInt() - pixels.minOf { it.x }
+        val drawOffsetY = ((height - stageHeight) / 2 / P_SIZE).toInt() - pixels.minOf { it.y }
 
-        // Create core shader with OPENRNDR noise generator
+        // Create core shader - select via SHADER env var (red, warm, startup)
         val noiseGenerator = OpenrndrNoiseGenerator()
-        val coreShader = V1RedShaderAlgorithm(noiseGenerator)
+        val shaderType = System.getenv("SHADER")?.lowercase() ?: "startup"
+        val coreShader = when (shaderType) {
+            "red" -> V1RedShaderAlgorithm(noiseGenerator)
+            "warm" -> WarmColorShaderAlgorithm(noiseGenerator)
+            "startup" -> StartupShaderAlgorithm()
+            else -> StartupShaderAlgorithm()
+        }
         val shader = OpenrndrPixelShader(coreShader)
 
         val gui = GUI()
@@ -50,9 +63,9 @@ fun main() = application {
         extend {
             offscreen.clearColor(0, ColorRGBa.BLACK)
             drawer.isolatedWithTarget(offscreen) {
-                stage.getPixels().forEach { pixel ->
+                pixels.forEach { pixel ->
                     val color = shader.shade(pixel.x, pixel.y, seconds, params)
-                    drawer.drawPixel(pixel.x, pixel.y, color)
+                    drawer.drawPixel(pixel.x + drawOffsetX, pixel.y + drawOffsetY, color)
                 }
             }
             blur.apply(offscreen.colorBuffer(0), blurred)

@@ -2,6 +2,7 @@ package dev.simonas.digitalsun.rpi
 
 import dev.simonas.digitalsun.core.ShaderParameters
 import dev.simonas.digitalsun.core.Stages
+import dev.simonas.digitalsun.core.StartupShaderAlgorithm
 import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
 import dev.simonas.digitalsun.core.WarmColorShaderAlgorithm
 import kotlinx.coroutines.*
@@ -64,6 +65,7 @@ fun start() {
     val shader = when (shaderType) {
         "red" -> V1RedShaderAlgorithm(noiseGenerator)
         "warm" -> WarmColorShaderAlgorithm(noiseGenerator)
+        "startup" -> StartupShaderAlgorithm()
         else -> WarmColorShaderAlgorithm(noiseGenerator)
     }
     val params = ShaderParameters()
