@@ -20,5 +20,15 @@ object ShaderFactory {
         NamedShader("kusama", KusamaDotsShaderAlgorithm()),
         NamedShader("riley", RileyWaveShaderAlgorithm()),
         NamedShader("eliasson", EliassonSunShaderAlgorithm()),
+        NamedShader("monet", MonetLiliesShaderAlgorithm()),
+        NamedShader("kandinsky", KandinskyCompositionShaderAlgorithm()),
+        NamedShader("turrell", TurrellGanzfeldShaderAlgorithm()),
+        NamedShader("hokusai", HokusaiWaveShaderAlgorithm()),
+        NamedShader("vermeer", VermeerLightShaderAlgorithm()),
+        NamedShader("martin", MartinBandsShaderAlgorithm()),
+        NamedShader("klimt", KlimtGoldShaderAlgorithm()),
+        NamedShader("infinity", KusamaInfinityShaderAlgorithm()),
+        NamedShader("lewitt", LeWittWallShaderAlgorithm()),
+        NamedShader("caravaggio", CaravaggioChiaroscuroShaderAlgorithm()),
     )
 }
