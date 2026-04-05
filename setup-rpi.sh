@@ -24,11 +24,20 @@ REAL_HOME=$(eval echo "~$REAL_USER")
 echo "[1/4] Installing system packages..."
 apt-get update
 apt-get install -y \
-    openjdk-21-jdk \
+    apt-transport-https \
+    gpg \
     cmake \
     build-essential \
     git \
     scons
+
+# Add Adoptium repository for JDK 21
+echo "[1b/4] Adding Adoptium apt repository..."
+mkdir -p /etc/apt/keyrings
+wget -qO- https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor -o /etc/apt/keyrings/adoptium.gpg
+echo "deb [signed-by=/etc/apt/keyrings/adoptium.gpg] https://packages.adoptium.net/artifactory/deb $(. /etc/os-release && echo "$VERSION_CODENAME") main" > /etc/apt/sources.list.d/adoptium.list
+apt-get update
+apt-get install -y temurin-21-jdk
 
 # Verify Java
 java -version 2>&1 | head -1
