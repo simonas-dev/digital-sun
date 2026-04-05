@@ -1,5 +1,6 @@
 package dev.simonas.digitalsun.rpi
 
+import dev.simonas.digitalsun.core.PixelShader
 import dev.simonas.digitalsun.core.ShaderParameters
 import dev.simonas.digitalsun.core.Stages
 import dev.simonas.digitalsun.core.StartupShaderAlgorithm
@@ -8,6 +9,7 @@ import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
 import dev.simonas.digitalsun.core.WarmColorShaderAlgorithm
 import dev.simonas.digitalsun.core.WarpFbmShaderAlgorithm
 import kotlinx.coroutines.*
+import java.util.concurrent.atomic.AtomicReference
 import kotlin.system.exitProcess
 import kotlin.system.measureNanoTime
 
@@ -17,6 +19,28 @@ fun main() {
     } catch (e: Exception) {
         main()
     }
+}
+
+private fun createShader(name: String, noiseGenerator: RpiNoiseGenerator): PixelShader = when (name) {
+    "red" -> V1RedShaderAlgorithm(noiseGenerator)
+    "warm" -> WarmColorShaderAlgorithm(noiseGenerator)
+    "startup" -> StartupShaderAlgorithm()
+    "torsion" -> TorsionShaderAlgorithm()
+    "warp" -> WarpFbmShaderAlgorithm()
+    else -> WarmColorShaderAlgorithm(noiseGenerator)
+}
+
+private val SHADER_NAMES = listOf("warm", "red", "startup", "torsion", "warp")
+
+private fun printShaderMenu(current: String) {
+    println()
+    println("Shaders:")
+    SHADER_NAMES.forEachIndexed { i, name ->
+        val marker = if (name == current) " <--" else ""
+        println("  ${i + 1}) $name$marker")
+    }
+    println()
+    println("Press 1-${SHADER_NAMES.size} to switch shader:")
 }
 
 fun start() {
@@ -59,22 +83,15 @@ fun start() {
     println("Initialization successful!")
     println("Stage initialized with ${pixels.size} pixels")
 
-    // Create shader with RPI noise generator
     val noiseGenerator = RpiNoiseGenerator()
 
-    // Choose shader: V1RedShaderAlgorithm or WarmColorShaderAlgorithm
-    val shaderType = System.getenv("SHADER")?.lowercase() ?: "warm"
-    val shader = when (shaderType) {
-        "red" -> V1RedShaderAlgorithm(noiseGenerator)
-        "warm" -> WarmColorShaderAlgorithm(noiseGenerator)
-        "startup" -> StartupShaderAlgorithm()
-        "torsion" -> TorsionShaderAlgorithm()
-        "warp" -> WarpFbmShaderAlgorithm()
-        else -> WarmColorShaderAlgorithm(noiseGenerator)
-    }
+    val initialShaderName = System.getenv("SHADER")?.lowercase() ?: "warm"
+    val currentShader = AtomicReference<PixelShader>(createShader(initialShaderName, noiseGenerator))
+    val currentShaderName = AtomicReference(initialShaderName)
     val params = ShaderParameters()
 
-    println("Using shader: ${shader.javaClass.simpleName}")
+    println("Using shader: ${currentShader.get().javaClass.simpleName}")
+    printShaderMenu(currentShaderName.get())
 
     println("Starting animation loop (Ctrl+C to stop)...")
     println("Parameters: seed=${params.seed}, spatialScale=${params.spatialScale}, timeScale=${params.timeScale}")
@@ -92,10 +109,29 @@ fun start() {
         var renderFrameCount = 0L
         var renderLastReport = System.currentTimeMillis()
 
+        // Stdin listener coroutine - reads key presses to switch shaders
+        animationScope.launch(Dispatchers.IO) {
+            val reader = System.`in`.bufferedReader()
+            while (isActive) {
+                val line = reader.readLine() ?: break
+                val index = line.trim().toIntOrNull()?.minus(1)
+                if (index != null && index in SHADER_NAMES.indices) {
+                    val name = SHADER_NAMES[index]
+                    currentShader.set(createShader(name, noiseGenerator))
+                    currentShaderName.set(name)
+                    println("Switched to shader: ${currentShader.get().javaClass.simpleName}")
+                    printShaderMenu(currentShaderName.get())
+                } else {
+                    printShaderMenu(currentShaderName.get())
+                }
+            }
+        }
+
         // Shader coroutine - calculates pixel colors
         animationScope.launch {
             while (isActive) {
                 val t = (System.currentTimeMillis() - startTime) / 1000.0
+                val shader = currentShader.get()
 
                 // Shade each pixel using the core shader algorithm
                 pixels.forEachIndexed { index, pixel ->
