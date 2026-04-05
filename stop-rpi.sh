@@ -4,8 +4,8 @@
 set -e
 
 # Configuration
-RPI_HOST="${RPI_HOST:-raspberrypi.local}"
-RPI_USER="${RPI_USER:-simonas}"
+RPI_HOST="${RPI_HOST:-192.168.0.165}"
+RPI_USER="${RPI_USER:-root}"
 PID_FILE="${PID_FILE:-/tmp/digital-sun.pid}"
 
 echo "Stopping Digital Sun on $RPI_USER@$RPI_HOST..."

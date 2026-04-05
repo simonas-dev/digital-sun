@@ -4,8 +4,8 @@
 set -e
 
 # Configuration
-RPI_HOST="${RPI_HOST:-192.168.0.209}"
-RPI_USER="${RPI_USER:-microsun}"
+RPI_HOST="${RPI_HOST:-192.168.0.165}"
+RPI_USER="${RPI_USER:-root}"
 RPI_DIR="${RPI_DIR:-~/digital-sun/target-rpi}"
 
 echo "============================================"
@@ -28,9 +28,13 @@ fi
 echo "Build successful!"
 echo ""
 
-# Deploy the JAR and run script
-echo "Deploying JAR and run script to Raspberry Pi..."
-scp target-rpi/build/libs/target-rpi-1.0.0.jar "$RPI_USER@$RPI_HOST:$RPI_DIR/"
+# Deploy the JAR and scripts
+echo "Deploying JAR and scripts to Raspberry Pi..."
+scp target-rpi/build/libs/target-rpi-1.0.0.jar \
+    target-rpi/run.sh \
+    target-rpi/run-simple.sh \
+    "$RPI_USER@$RPI_HOST:$RPI_DIR/"
+ssh "$RPI_USER@$RPI_HOST" "chmod +x $RPI_DIR/run.sh $RPI_DIR/run-simple.sh"
 
 echo "Running on remote..."
 echo "Press Ctrl+C to stop"
@@ -52,6 +56,6 @@ if [ ! -z "$HW" ]; then
     ENV_ARGS="$ENV_ARGS HW=$HW"
 fi
 
-# Run with -t to allocate a pseudo-TTY (ensures Ctrl+C is forwarded to remote process)
-# SSH will forward SIGINT when you press Ctrl+C, run.sh will forward it to Java, Main.kt cleanup runs
-ssh -t "$RPI_USER@$RPI_HOST" "cd $RPI_DIR && sudo $ENV_ARGS ./run.sh"
+# Run interactively — stdin is forwarded as a pipe so shader switching works.
+# Ctrl+C sends SIGINT to ssh, which kills the remote process.
+ssh "$RPI_USER@$RPI_HOST" "cd $RPI_DIR && $ENV_ARGS ./run.sh"
