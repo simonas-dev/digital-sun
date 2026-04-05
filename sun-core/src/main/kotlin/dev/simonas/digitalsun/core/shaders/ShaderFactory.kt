@@ -19,5 +19,6 @@ object ShaderFactory {
         NamedShader("hilma", HilmaSpiralsShaderAlgorithm()),
         NamedShader("kusama", KusamaDotsShaderAlgorithm()),
         NamedShader("riley", RileyWaveShaderAlgorithm()),
+        NamedShader("eliasson", EliassonSunShaderAlgorithm()),
     )
 }
