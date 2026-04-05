@@ -18,5 +18,6 @@ object ShaderFactory {
         NamedShader("rothko", RothkoFieldShaderAlgorithm()),
         NamedShader("hilma", HilmaSpiralsShaderAlgorithm()),
         NamedShader("kusama", KusamaDotsShaderAlgorithm()),
+        NamedShader("riley", RileyWaveShaderAlgorithm()),
     )
 }
