@@ -15,5 +15,6 @@ object ShaderFactory {
         NamedShader("warp", WarpFbmShaderAlgorithm()),
         NamedShader("warm", WarmColorShaderAlgorithm(noiseGenerator)),
         NamedShader("red", V1RedShaderAlgorithm(noiseGenerator)),
+        NamedShader("rothko", RothkoFieldShaderAlgorithm()),
     )
 }
