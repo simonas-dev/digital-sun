@@ -32,16 +32,12 @@ fi
 
 echo "Starting Digital Sun..."
 
-# Forward signals to Java process - Main.kt shutdown hook handles cleanup
-trap 'kill -TERM "$JAVA_PID" 2>/dev/null; wait "$JAVA_PID" 2>/dev/null; rm -f "$PID_FILE"' SIGINT SIGTERM
+# Write PID file (will contain the java PID after exec in run-simple.sh)
+echo "$$" > "$PID_FILE"
 
-# Run the simple script in background for PID management
-"$SCRIPT_DIR/run-simple.sh" &
+# Clean up PID file on exit
+trap 'rm -f "$PID_FILE"' EXIT
 
-JAVA_PID=$!
-echo "$JAVA_PID" > "$PID_FILE"
-echo "Started with PID: $JAVA_PID"
-
-# Wait for process, then clean up PID file
-wait "$JAVA_PID"
-rm -f "$PID_FILE"
+# Exec replaces this shell with run-simple.sh (which execs java),
+# so stdin passes straight through to the Java process.
+exec "$SCRIPT_DIR/run-simple.sh"
