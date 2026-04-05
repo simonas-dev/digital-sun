@@ -26,7 +26,7 @@ private fun printShaderMenu(shaders: List<NamedShader>, current: String) {
         println("  ${i + 1}) ${named.name}$marker")
     }
     println()
-    println("Press 1-${shaders.size} to switch shader:")
+    println("Press 1-${shaders.size}, n(ext), or p(rev) to switch shader:")
 }
 
 fun start() {
@@ -52,6 +52,9 @@ fun start() {
     Runtime.getRuntime().addShutdownHook(Thread {
         println("\nShutdown signal received, cleaning up...")
         try {
+            // Restore terminal to normal mode
+            ProcessBuilder("stty", "icanon", "echo").inheritIO().start().waitFor()
+
             // CRITICAL: Cancel coroutines FIRST to stop ledStrip access
             animationScope.cancel()
             Thread.sleep(150) // Give coroutines time to finish their current iteration
@@ -97,19 +100,38 @@ fun start() {
         var renderFrameCount = 0L
         var renderLastReport = System.currentTimeMillis()
 
-        // Stdin listener coroutine - reads key presses to switch shaders
+        // Stdin listener coroutine - reads single key presses to switch shaders
         animationScope.launch(Dispatchers.IO) {
-            val reader = System.`in`.bufferedReader()
+            // Set terminal to raw mode using ProcessBuilder.inheritIO() so stty
+            // operates on the actual parent terminal (not a child subprocess's stdin)
+            try {
+                ProcessBuilder("stty", "-icanon", "-echo")
+                    .inheritIO()
+                    .start()
+                    .waitFor()
+            } catch (_: Exception) { }
+
+            val stream = System.`in`
             while (isActive) {
-                val line = reader.readLine() ?: break
-                val index = line.trim().toIntOrNull()?.minus(1)
+                val byte = stream.read()
+                if (byte == -1) break
+                val ch = byte.toChar().lowercaseChar()
+                val index = when (ch) {
+                    'n' -> {
+                        val current = shaders.indexOfFirst { it.name == currentShaderName.get() }
+                        (current + 1) % shaders.size
+                    }
+                    'p' -> {
+                        val current = shaders.indexOfFirst { it.name == currentShaderName.get() }
+                        (current - 1 + shaders.size) % shaders.size
+                    }
+                    else -> ch.digitToIntOrNull()?.minus(1)
+                }
                 if (index != null && index in shaders.indices) {
                     val named = shaders[index]
                     currentShader.set(named.shader)
                     currentShaderName.set(named.name)
                     println("Switched to shader: ${named.shader.javaClass.simpleName}")
-                    printShaderMenu(shaders, currentShaderName.get())
-                } else {
                     printShaderMenu(shaders, currentShaderName.get())
                 }
             }

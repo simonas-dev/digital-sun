@@ -39,11 +39,21 @@ fun main() = application {
         gui.add(params, "Noise Parameters")
         gui.visible = true
 
-        // Keys 1–N switch shaders instantly
+        // Keys 1–N switch shaders instantly, n/p for next/prev
         keyboard.keyDown.listen { event: KeyEvent ->
-            val index = event.name.toIntOrNull()?.minus(1)
-            if (index != null && index in shaders.indices) {
-                shaderSelector.selectedIndex = index
+            when (event.name) {
+                "n" -> {
+                    shaderSelector.selectedIndex = (shaderSelector.selectedIndex + 1) % shaders.size
+                }
+                "p" -> {
+                    shaderSelector.selectedIndex = (shaderSelector.selectedIndex - 1 + shaders.size) % shaders.size
+                }
+                else -> {
+                    val index = event.name.toIntOrNull()?.minus(1)
+                    if (index != null && index in shaders.indices) {
+                        shaderSelector.selectedIndex = index
+                    }
+                }
             }
         }
 
