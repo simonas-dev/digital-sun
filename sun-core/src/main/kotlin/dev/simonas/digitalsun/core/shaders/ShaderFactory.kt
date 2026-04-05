@@ -16,5 +16,6 @@ object ShaderFactory {
         NamedShader("warm", WarmColorShaderAlgorithm(noiseGenerator)),
         NamedShader("red", V1RedShaderAlgorithm(noiseGenerator)),
         NamedShader("rothko", RothkoFieldShaderAlgorithm()),
+        NamedShader("hilma", HilmaSpiralsShaderAlgorithm()),
     )
 }
