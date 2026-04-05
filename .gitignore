@@ -15,3 +15,9 @@ ShaderError.glsl
 # Deployment configuration
 .env
 
+# Cached downloads
+.cache/
+
+# SD card backups
+backups/
+
