@@ -3,11 +3,8 @@ package dev.simonas.digitalsun.rpi
 import dev.simonas.digitalsun.core.PixelShader
 import dev.simonas.digitalsun.core.ShaderParameters
 import dev.simonas.digitalsun.core.Stages
-import dev.simonas.digitalsun.core.StartupShaderAlgorithm
-import dev.simonas.digitalsun.core.TorsionShaderAlgorithm
-import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
-import dev.simonas.digitalsun.core.WarmColorShaderAlgorithm
-import dev.simonas.digitalsun.core.WarpFbmShaderAlgorithm
+import dev.simonas.digitalsun.core.shaders.NamedShader
+import dev.simonas.digitalsun.core.shaders.ShaderFactory
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.system.exitProcess
@@ -21,26 +18,15 @@ fun main() {
     }
 }
 
-private fun createShader(name: String, noiseGenerator: RpiNoiseGenerator): PixelShader = when (name) {
-    "red" -> V1RedShaderAlgorithm(noiseGenerator)
-    "warm" -> WarmColorShaderAlgorithm(noiseGenerator)
-    "startup" -> StartupShaderAlgorithm()
-    "torsion" -> TorsionShaderAlgorithm()
-    "warp" -> WarpFbmShaderAlgorithm()
-    else -> WarmColorShaderAlgorithm(noiseGenerator)
-}
-
-private val SHADER_NAMES = listOf("warm", "red", "startup", "torsion", "warp")
-
-private fun printShaderMenu(current: String) {
+private fun printShaderMenu(shaders: List<NamedShader>, current: String) {
     println()
     println("Shaders:")
-    SHADER_NAMES.forEachIndexed { i, name ->
-        val marker = if (name == current) " <--" else ""
-        println("  ${i + 1}) $name$marker")
+    shaders.forEachIndexed { i, named ->
+        val marker = if (named.name == current) " <--" else ""
+        println("  ${i + 1}) ${named.name}$marker")
     }
     println()
-    println("Press 1-${SHADER_NAMES.size} to switch shader:")
+    println("Press 1-${shaders.size} to switch shader:")
 }
 
 fun start() {
@@ -84,14 +70,16 @@ fun start() {
     println("Stage initialized with ${pixels.size} pixels")
 
     val noiseGenerator = RpiNoiseGenerator()
+    val shaders = ShaderFactory.all(noiseGenerator)
 
     val initialShaderName = System.getenv("SHADER")?.lowercase() ?: "warm"
-    val currentShader = AtomicReference<PixelShader>(createShader(initialShaderName, noiseGenerator))
-    val currentShaderName = AtomicReference(initialShaderName)
+    val initialShader = shaders.firstOrNull { it.name == initialShaderName } ?: shaders.first()
+    val currentShader = AtomicReference<PixelShader>(initialShader.shader)
+    val currentShaderName = AtomicReference(initialShader.name)
     val params = ShaderParameters()
 
     println("Using shader: ${currentShader.get().javaClass.simpleName}")
-    printShaderMenu(currentShaderName.get())
+    printShaderMenu(shaders, currentShaderName.get())
 
     println("Starting animation loop (Ctrl+C to stop)...")
     println("Parameters: seed=${params.seed}, spatialScale=${params.spatialScale}, timeScale=${params.timeScale}")
@@ -115,14 +103,14 @@ fun start() {
             while (isActive) {
                 val line = reader.readLine() ?: break
                 val index = line.trim().toIntOrNull()?.minus(1)
-                if (index != null && index in SHADER_NAMES.indices) {
-                    val name = SHADER_NAMES[index]
-                    currentShader.set(createShader(name, noiseGenerator))
-                    currentShaderName.set(name)
-                    println("Switched to shader: ${currentShader.get().javaClass.simpleName}")
-                    printShaderMenu(currentShaderName.get())
+                if (index != null && index in shaders.indices) {
+                    val named = shaders[index]
+                    currentShader.set(named.shader)
+                    currentShaderName.set(named.name)
+                    println("Switched to shader: ${named.shader.javaClass.simpleName}")
+                    printShaderMenu(shaders, currentShaderName.get())
                 } else {
-                    printShaderMenu(currentShaderName.get())
+                    printShaderMenu(shaders, currentShaderName.get())
                 }
             }
         }

@@ -1,12 +1,7 @@
 package dev.simonas.digitalsun.openrndr
 
-import dev.simonas.digitalsun.core.PixelShader
 import dev.simonas.digitalsun.core.Stages
-import dev.simonas.digitalsun.core.StartupShaderAlgorithm
-import dev.simonas.digitalsun.core.V1RedShaderAlgorithm
-import dev.simonas.digitalsun.core.TorsionShaderAlgorithm
-import dev.simonas.digitalsun.core.WarmColorShaderAlgorithm
-import dev.simonas.digitalsun.core.WarpFbmShaderAlgorithm
+import dev.simonas.digitalsun.core.shaders.ShaderFactory
 import org.openrndr.KeyEvent
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
@@ -32,31 +27,23 @@ fun main() = application {
         val drawOffsetY = ((height - stageHeight) / 2 / P_SIZE).toInt() - pixels.minOf { it.y }
 
         val noiseGenerator = OpenrndrNoiseGenerator()
+        val shaders = ShaderFactory.all(noiseGenerator)
 
-        fun createShader(selection: ShaderSelection): PixelShader = when (selection) {
-            ShaderSelection.STARTUP -> StartupShaderAlgorithm()
-            ShaderSelection.TORSION -> TorsionShaderAlgorithm()
-            ShaderSelection.WARP -> WarpFbmShaderAlgorithm()
-            ShaderSelection.WARM -> WarmColorShaderAlgorithm(noiseGenerator)
-            ShaderSelection.RED -> V1RedShaderAlgorithm(noiseGenerator)
-        }
-
-        val shaderSelector = ShaderSelector()
+        val shaderSelector = ShaderSelector(shaders.map { it.name })
         val params = Parameters()
-        var activeSelection = shaderSelector.selection
-        val shader = OpenrndrPixelShader(createShader(activeSelection))
+        var activeIndex = shaderSelector.selectedIndex
+        val shader = OpenrndrPixelShader(shaders[activeIndex].shader)
 
         val gui = GUI()
         gui.add(shaderSelector, "Shader")
         gui.add(params, "Noise Parameters")
         gui.visible = true
 
-        // Keys 1–5 switch shaders instantly
-        val shaders = ShaderSelection.entries
+        // Keys 1–N switch shaders instantly
         keyboard.keyDown.listen { event: KeyEvent ->
             val index = event.name.toIntOrNull()?.minus(1)
             if (index != null && index in shaders.indices) {
-                shaderSelector.selection = shaders[index]
+                shaderSelector.selectedIndex = index
             }
         }
 
@@ -79,9 +66,9 @@ fun main() = application {
 
         extend {
             // Swap shader if selection changed
-            if (shaderSelector.selection != activeSelection) {
-                activeSelection = shaderSelector.selection
-                shader.coreShader = createShader(activeSelection)
+            if (shaderSelector.selectedIndex != activeIndex) {
+                activeIndex = shaderSelector.selectedIndex
+                shader.coreShader = shaders[activeIndex].shader
             }
 
             offscreen.clearColor(0, ColorRGBa.BLACK)
@@ -95,7 +82,8 @@ fun main() = application {
             drawer.image(blurred)
 
             drawer.fill = ColorRGBa.WHITE
-            drawer.text("[${activeSelection.name}]  1:STARTUP  2:TORSION  3:WARP  4:WARM  5:RED", 300.0, height - 60.0)
+            val shaderLabels = shaders.mapIndexed { i, s -> "${i + 1}:${s.name}" }.joinToString("  ")
+            drawer.text("[${shaders[activeIndex].name}]  $shaderLabels", 300.0, height - 60.0)
             drawer.text("Time: %.2f".format(seconds), 300.0, height - 40.0)
             drawer.text("FPS: %.1f".format(frameCount / seconds), 300.0, height - 20.0)
         }

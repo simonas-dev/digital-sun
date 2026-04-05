@@ -1,5 +1,8 @@
-package dev.simonas.digitalsun.core
+package dev.simonas.digitalsun.core.shaders
 
+import dev.simonas.digitalsun.core.ColorValue
+import dev.simonas.digitalsun.core.PixelShader
+import dev.simonas.digitalsun.core.ShaderParameters
 import kotlin.math.abs
 import kotlin.math.sin
 import kotlin.math.sqrt

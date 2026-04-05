@@ -6,16 +6,9 @@ import org.openrndr.extra.parameters.DoubleParameter
 import org.openrndr.extra.parameters.IntParameter
 import org.openrndr.extra.parameters.OptionParameter
 
-/**
- * OPENRNDR GUI-bound parameters that wrap core ShaderParameters
- */
-enum class ShaderSelection {
-    STARTUP, TORSION, WARP, WARM, RED
-}
-
-class ShaderSelector {
-    @OptionParameter("Shader", order = 0)
-    var selection: ShaderSelection = ShaderSelection.STARTUP
+class ShaderSelector(val names: List<String>) {
+    @IntParameter("Shader", 0, 99)
+    var selectedIndex: Int = 0
 }
 
 class Parameters {
