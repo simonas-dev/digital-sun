@@ -12,9 +12,13 @@ import kotlin.math.pow
  * Warm color shader using Perlin noise to generate colors ranging from yellow through red to magenta.
  * Uses Perlin noise to control both hue (color) and value (brightness) in nearby dimensions.
  */
-class WarmColorShaderAlgorithm(private val noiseGenerator: NoiseGenerator) : PixelShader {
+class WarmColorShaderAlgorithm(
+    private val noiseGenerator: NoiseGenerator,
+    private val params: ShaderParameters = ShaderParameters(),
+) : PixelShader {
 
     override fun shade(x: Int, y: Int, t: Double, params: ShaderParameters): ColorValue {
+        val params = this.params
         // Use Perlin noise for hue - sample in xyz space
         val hueNoise = when (params.noiseType) {
             NoiseType.PERLIN -> {
