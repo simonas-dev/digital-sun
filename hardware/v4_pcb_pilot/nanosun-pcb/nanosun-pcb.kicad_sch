@@ -176,6 +176,225 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "nanosun-pcb:CP_THT"
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 2.54 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "CP"
+				(at 2.54 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.81mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "CP_THT_0_1"
+				(rectangle
+					(start -2.032 0.508)
+					(end 2.032 0)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -2.032 0)
+					(end 2.032 -0.508)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "CP_THT_1_1"
+				(pin passive line
+					(at 0 2.54 270)
+					(length 2.032)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.032)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "nanosun-pcb:R_THT"
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_THT_0_1"
+				(rectangle
+					(start -2.032 0.762)
+					(end 2.032 -0.762)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_THT_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 1.778)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 1.778)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "nanosun-pcb:WS2812B_Strip"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -649,16 +868,16 @@
 		)
 	)
 	(junction
-		(at 27.94 29.21)
+		(at 24.13 34.29)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4063dd77-960e-4719-b7af-f55398c1f2ae")
+		(uuid "2b7ddb16-fd2e-4bb9-a410-6716f52d9b9c")
 	)
 	(junction
-		(at 27.94 34.29)
+		(at 24.13 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "cf5646bf-9ed4-4e07-b9e0-648271c5c022")
+		(uuid "5d1caa92-a1a8-4534-9dae-100d44efcd61")
 	)
 	(no_connect
 		(at 254 88.9)
@@ -713,16 +932,6 @@
 			(type default)
 		)
 		(uuid "04a9b835-13db-4ac9-a840-c9bdd086e8d2")
-	)
-	(wire
-		(pts
-			(xy 31.75 34.29) (xy 27.94 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0544f2e4-a05b-4a7b-988c-8c89158b1365")
 	)
 	(wire
 		(pts
@@ -793,16 +1002,6 @@
 			(type default)
 		)
 		(uuid "0d60ef45-b542-4bb2-8caf-f49a7a40e003")
-	)
-	(wire
-		(pts
-			(xy 24.13 31.75) (xy 46.99 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e368fec-4306-4c82-ba41-feebab1bfc7a")
 	)
 	(wire
 		(pts
@@ -953,16 +1152,6 @@
 			(type default)
 		)
 		(uuid "24051124-0564-4417-b69e-bd646a0091f3")
-	)
-	(wire
-		(pts
-			(xy 24.13 29.21) (xy 27.94 29.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2502d68f-ee63-4ed6-a0b9-402211f1ec7e")
 	)
 	(wire
 		(pts
@@ -1316,6 +1505,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 34.29) (xy 24.13 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69d960e9-9bf6-464d-8647-1db8a8a151a4")
+	)
+	(wire
+		(pts
 			(xy 81.28 64.77) (xy 82.55 64.77)
 		)
 		(stroke
@@ -1356,13 +1555,13 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 29.21) (xy 27.94 29.21)
+			(xy 24.13 38.1) (xy 24.13 34.29)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "76faba71-10aa-4c10-afd9-1396cba7146f")
+		(uuid "7270633e-fd32-4ed5-afa0-0cf06d6fe03e")
 	)
 	(wire
 		(pts
@@ -1576,16 +1775,6 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 34.29) (xy 24.13 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9652d29d-0561-471b-8061-ff50d9823dd6")
-	)
-	(wire
-		(pts
 			(xy 135.89 80.01) (xy 133.35 80.01)
 		)
 		(stroke
@@ -1773,6 +1962,26 @@
 			(type default)
 		)
 		(uuid "b228fe6c-0ec7-4b57-b587-15e229d65d25")
+	)
+	(wire
+		(pts
+			(xy 24.13 29.21) (xy 26.67 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6058f96-1fd9-46f7-b929-12a379e0fc82")
+	)
+	(wire
+		(pts
+			(xy 24.13 25.4) (xy 24.13 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6b713ef-9496-4f75-ab98-3a9e3dd2ac4a")
 	)
 	(wire
 		(pts
@@ -1973,6 +2182,86 @@
 			(type default)
 		)
 		(uuid "dc4fabfa-937a-4c64-b752-cf5a316bb691")
+	)
+	(wire
+		(pts
+			(xy 24.13 31.75) (xy 29.21 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-1001-4001-8001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 36.83 31.75) (xy 46.99 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-1002-4001-8001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 21.59 104.14) (xy 21.59 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-100a-4001-8001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 21.59 111.76) (xy 21.59 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-100b-4001-8001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 41.91 104.14) (xy 41.91 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-100c-4001-8001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 41.91 111.76) (xy 41.91 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-100d-4001-8001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 62.23 104.14) (xy 62.23 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-100e-4001-8001-000000000001")
+	)
+	(wire
+		(pts
+			(xy 62.23 111.76) (xy 62.23 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deadbeef-100f-4001-8001-000000000001")
 	)
 	(wire
 		(pts
@@ -2371,8 +2660,9 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+12V")
-		(at 31.75 29.21 0)
+		(lib_id "power:GND")
+		(at 26.67 29.21 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2380,7 +2670,7 @@
 		(dnp no)
 		(uuid "0ea1e9c8-235a-4878-b960-9a5b0f21874b")
 		(property "Reference" "#PWR02"
-			(at 31.75 33.02 0)
+			(at 26.67 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2388,8 +2678,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+12V"
-			(at 33.528 27.94 0)
+		(property "Value" "GND"
+			(at 25.146 25.654 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2398,7 +2688,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 31.75 29.21 0)
+			(at 26.67 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2407,7 +2697,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 31.75 29.21 0)
+			(at 26.67 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2416,7 +2706,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 31.75 29.21 0)
+			(at 26.67 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4368,7 +4658,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 27.94 34.29 180)
+		(at 24.13 38.1 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4376,7 +4666,7 @@
 		(dnp no)
 		(uuid "702bc8fd-085e-44e5-a7ac-64c88d3425ca")
 		(property "Reference" "#FLG02"
-			(at 27.94 36.195 0)
+			(at 24.13 40.005 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4385,7 +4675,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 27.94 39.37 0)
+			(at 24.13 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4393,7 +4683,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 34.29 0)
+			(at 24.13 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4402,7 +4692,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 27.94 34.29 0)
+			(at 24.13 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4411,7 +4701,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 27.94 34.29 0)
+			(at 24.13 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5787,8 +6077,9 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 31.75 34.29 0)
+		(lib_id "power:+12V")
+		(at 26.67 34.29 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5796,7 +6087,7 @@
 		(dnp no)
 		(uuid "ae507ec8-435d-4876-bfe0-fbb8eecf2ac3")
 		(property "Reference" "#PWR04"
-			(at 31.75 40.64 0)
+			(at 26.67 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5804,8 +6095,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 36.83 34.036 0)
+		(property "Value" "+12V"
+			(at 26.67 38.354 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5813,7 +6104,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 31.75 34.29 0)
+			(at 26.67 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5822,7 +6113,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 31.75 34.29 0)
+			(at 26.67 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5831,7 +6122,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 31.75 34.29 0)
+			(at 26.67 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5929,7 +6220,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 27.94 29.21 0)
+		(at 24.13 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5938,7 +6229,7 @@
 		(fields_autoplaced yes)
 		(uuid "bec96b05-1759-4f36-8df3-6ccb9be793a2")
 		(property "Reference" "#FLG01"
-			(at 27.94 27.305 0)
+			(at 24.13 23.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5947,7 +6238,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 27.94 24.13 0)
+			(at 24.13 20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5955,7 +6246,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 29.21 0)
+			(at 24.13 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5964,7 +6255,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 27.94 29.21 0)
+			(at 24.13 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5973,7 +6264,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 27.94 29.21 0)
+			(at 24.13 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6097,7 +6388,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3_1x03_P5.00mm_Horizontal"
 			(at 19.05 31.75 0)
 			(effects
 				(font
@@ -6961,6 +7252,648 @@
 			(project "nanosun-pcb"
 				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
 					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "nanosun-pcb:R_THT")
+		(at 33.02 31.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-2001-4001-8001-000000000001")
+		(property "Reference" "R1"
+			(at 35.56 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47"
+			(at 35.56 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 33.02 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 33.02 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-3010-4001-8001-000000000001")
+		)
+		(pin "2"
+			(uuid "deadbeef-3011-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "nanosun-pcb:CP_THT")
+		(at 21.59 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-200a-4001-8001-000000000001")
+		(property "Reference" "C1"
+			(at 24.13 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "470uF/25V"
+			(at 24.13 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 21.59 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 21.59 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 21.59 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-30a0-4001-8001-000000000001")
+		)
+		(pin "2"
+			(uuid "deadbeef-30a1-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "nanosun-pcb:CP_THT")
+		(at 41.91 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-200b-4001-8001-000000000001")
+		(property "Reference" "C2"
+			(at 44.45 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "470uF/25V"
+			(at 44.45 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 41.91 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 41.91 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 41.91 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-30b0-4001-8001-000000000001")
+		)
+		(pin "2"
+			(uuid "deadbeef-30b1-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "nanosun-pcb:CP_THT")
+		(at 62.23 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-200c-4001-8001-000000000001")
+		(property "Reference" "C3"
+			(at 64.77 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "470uF/25V"
+			(at 64.77 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 62.23 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-30c0-4001-8001-000000000001")
+		)
+		(pin "2"
+			(uuid "deadbeef-30c1-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 21.59 104.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-2014-4001-8001-000000000001")
+		(property "Reference" "#PWRC00"
+			(at 24.13 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "+12V"
+			(at 24.13 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 21.59 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 21.59 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 21.59 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-3140-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "#PWRC00")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 41.91 104.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-2015-4001-8001-000000000001")
+		(property "Reference" "#PWRC01"
+			(at 44.45 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "+12V"
+			(at 44.45 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 41.91 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 41.91 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 41.91 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-3150-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "#PWRC01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 62.23 104.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-2016-4001-8001-000000000001")
+		(property "Reference" "#PWRC02"
+			(at 64.77 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "+12V"
+			(at 64.77 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 62.23 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-3160-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "#PWRC02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 21.59 114.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-201e-4001-8001-000000000001")
+		(property "Reference" "#PWRG00"
+			(at 24.13 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GND"
+			(at 24.13 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 21.59 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 21.59 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 21.59 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-31e0-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "#PWRG00")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 41.91 114.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-201f-4001-8001-000000000001")
+		(property "Reference" "#PWRG01"
+			(at 44.45 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GND"
+			(at 44.45 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 41.91 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 41.91 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 41.91 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-31f0-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "#PWRG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 62.23 114.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deadbeef-2020-4001-8001-000000000001")
+		(property "Reference" "#PWRG02"
+			(at 64.77 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GND"
+			(at 64.77 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 62.23 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deadbeef-3200-4001-8001-000000000001")
+		)
+		(instances
+			(project "nanosun-pcb"
+				(path "/9427757f-2137-44ed-ab82-f8a05bdcd89a"
+					(reference "#PWRG02")
 					(unit 1)
 				)
 			)
