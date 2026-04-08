@@ -1,0 +1,24 @@
+# KiCad
+*-backups/
+_autosave-*
+*.lck
+*.kicad_prl
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_pro-bak
+fp-info-cache
+*.bak
+*.000
+*.net
+*.dsn
+*.ses
+
+# ERC/DRC reports
+*.rpt
+
+# Fab outputs
+gerbers/
+*.gbr
+*.gbrjob
+*.drl
+*.xnc
