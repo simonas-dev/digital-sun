@@ -201,7 +201,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
+			(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.81mm"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2481,7 +2481,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_16px_100mm"
+		(property "Footprint" ""
 			(at 102.87 36.83 0)
 			(effects
 				(font
@@ -2754,7 +2754,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_20px_125mm"
+		(property "Footprint" ""
 			(at 138.43 36.83 0)
 			(effects
 				(font
@@ -2960,7 +2960,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_06px_37_5mm"
+		(property "Footprint" ""
 			(at 245.11 72.39 0)
 			(effects
 				(font
@@ -3101,7 +3101,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_22px_137_5mm"
+		(property "Footprint" ""
 			(at 138.43 72.39 0)
 			(effects
 				(font
@@ -3177,7 +3177,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_24px_150mm"
+		(property "Footprint" ""
 			(at 85.09 72.39 0)
 			(effects
 				(font
@@ -3578,7 +3578,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_24px_150mm"
+		(property "Footprint" ""
 			(at 227.33 36.83 0)
 			(effects
 				(font
@@ -3654,7 +3654,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_22px_137_5mm"
+		(property "Footprint" ""
 			(at 191.77 36.83 0)
 			(effects
 				(font
@@ -3795,7 +3795,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_18px_112_5mm"
+		(property "Footprint" ""
 			(at 120.65 36.83 0)
 			(effects
 				(font
@@ -3936,7 +3936,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_12px_75mm"
+		(property "Footprint" ""
 			(at 67.31 36.83 0)
 			(effects
 				(font
@@ -4337,7 +4337,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_14px_87_5mm"
+		(property "Footprint" ""
 			(at 85.09 36.83 0)
 			(effects
 				(font
@@ -4608,7 +4608,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_24px_150mm"
+		(property "Footprint" ""
 			(at 209.55 36.83 0)
 			(effects
 				(font
@@ -4749,7 +4749,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_22px_137_5mm"
+		(property "Footprint" ""
 			(at 173.99 36.83 0)
 			(effects
 				(font
@@ -4890,7 +4890,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_12px_75mm"
+		(property "Footprint" ""
 			(at 227.33 72.39 0)
 			(effects
 				(font
@@ -5226,7 +5226,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_06px_37_5mm"
+		(property "Footprint" ""
 			(at 49.53 36.83 0)
 			(effects
 				(font
@@ -5302,7 +5302,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_24px_150mm"
+		(property "Footprint" ""
 			(at 245.11 36.83 0)
 			(effects
 				(font
@@ -5703,7 +5703,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_16px_100mm"
+		(property "Footprint" ""
 			(at 191.77 72.39 0)
 			(effects
 				(font
@@ -6170,7 +6170,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_22px_137_5mm"
+		(property "Footprint" ""
 			(at 120.65 72.39 0)
 			(effects
 				(font
@@ -6312,7 +6312,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_24px_150mm"
+		(property "Footprint" ""
 			(at 67.31 72.39 0)
 			(effects
 				(font
@@ -6591,7 +6591,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_14px_87_5mm"
+		(property "Footprint" ""
 			(at 209.55 72.39 0)
 			(effects
 				(font
@@ -6667,7 +6667,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_24px_150mm"
+		(property "Footprint" ""
 			(at 49.53 72.39 0)
 			(effects
 				(font
@@ -6808,7 +6808,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_22px_137_5mm"
+		(property "Footprint" ""
 			(at 102.87 72.39 0)
 			(effects
 				(font
@@ -7014,7 +7014,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_20px_125mm"
+		(property "Footprint" ""
 			(at 156.21 72.39 0)
 			(effects
 				(font
@@ -7284,8 +7284,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
-			(at 33.02 16.51 0)
+		(property "Footprint" ""
+			(at 33.02 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7350,8 +7350,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
-			(at 20.066 129.286 0)
+		(property "Footprint" ""
+			(at 21.59 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7416,8 +7416,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
-			(at 43.688 122.682 0)
+		(property "Footprint" ""
+			(at 41.91 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7482,8 +7482,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
-			(at 67.056 127.762 0)
+		(property "Footprint" ""
+			(at 62.23 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8122,7 +8122,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_18px_112_5mm"
+		(property "Footprint" ""
 			(at 173.99 72.39 0)
 			(effects
 				(font
@@ -8263,7 +8263,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nanosun-pcb:WS2812B_Row_22px_137_5mm"
+		(property "Footprint" ""
 			(at 156.21 36.83 0)
 			(effects
 				(font

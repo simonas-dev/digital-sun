@@ -86,7 +86,7 @@
     (exclude_from_sim no) (in_bom yes) (on_board yes)
     (property "Reference" "C" (at 2.54 2.54 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Value" "CP" (at 2.54 -2.54 0) (effects (font (size 1.27 1.27)) (justify left)))
-    (property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.81mm" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+    (property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
     (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
     (symbol "CP_THT_0_1"
       (rectangle (start -2.032 0.508) (end 2.032 0)
