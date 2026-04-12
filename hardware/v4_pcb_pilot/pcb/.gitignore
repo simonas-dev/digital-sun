@@ -15,10 +15,3 @@ fp-info-cache
 
 # ERC/DRC reports
 *.rpt
-
-# Fab outputs
-gerbers/
-*.gbr
-*.gbrjob
-*.drl
-*.xnc
