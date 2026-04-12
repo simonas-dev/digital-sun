@@ -10,21 +10,20 @@ Companion to [`PCB_READINESS.md`](./PCB_READINESS.md). Walk this top-to-bottom; 
 
 Batch file edit applied: all 22 horizontal trace endpoints extended to exact bus X coordinates, 16 bus segments split to create matching endpoints, GND bus gap closed. No DRC count change — the 50 unconnected items are from right-side strip pad bridging (by design), not from trace endpoints. See `PCB_READINESS.md` §3.1.
 
-### 1.1b Route LED10 +12V trace (blocking)
+### 1.1b Route LED10 +12V trace — ✅ NOT AN ISSUE (confirmed 2026-04-12)
 
-- [ ] LED10's VCC pads have no +12V trace. Route from left pad 1 at (74.25, 85.825) to +12V bus at x=151.803. Best done in Pcbnew.
+- [x] Previously misidentified as missing. LED10's right-side VCC pad at (225.75, 85.825) connects to the +12V bus at x=228.201 via three segments. The left-side pad relies on strip bridging — same as all other LEDs. See `PCB_READINESS.md` §3.1.
 
-### 1.1c Connect U1 GND pins (blocking) — ✅ DONE 2026-04-12
+### 1.1c Connect U1 GND pins — ✅ DONE 2026-04-12
 
 - [x] **GND → U1 pad 2** (MP1584 GND @ (185, 109.5) B.Cu)
 - [x] **GND → U1 pad 3** (MP1584 GND @ (185, 90.5) B.Cu)
 
 Connected manually in Pcbnew. DRC confirms U1 GND pads no longer appear as unconnected.
 
-### 1.2 Remove dangling stubs (optional)
+### 1.2 Remove dangling stub (optional)
 
-- [ ] Delete GND B.Cu stub at (145.0, 147.0), length 0.002 mm
-- [ ] Delete +12V F.Cu stub at (151.8, 76.9), length 0.053 mm
+- [ ] Delete +12V F.Cu stub at (197.0, 160.6), length 0.28 mm
 
 ### 1.3 Sync schematic → PCB (clears the 13 parity errors) — ✅ DONE 2026-04-12
 
@@ -59,7 +58,7 @@ Connected manually in Pcbnew. DRC confirms U1 GND pads no longer appear as uncon
   /Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb drc \
     --schematic-parity --severity-all --output DRC.rpt nanosun-pcb.kicad_pcb
   ```
-  **Expected after fixing LED10 +12V:** 0 error-severity violations, ~85 warnings (silk) + ~28 track_dangling warnings, **47 unconnected** (right-side strip pads — by design), 0 parity issues. The 47 unconnected items are false positives from LED strips bridging left↔right pads internally. U1 GND fixed 2026-04-12.
+  **Expected:** 0 error-severity violations, ~15 warnings (10 silk_over_copper + 4 text_height + 1 track_dangling), **48 unconnected** (all strip-pad bridging false positives — by design), 0 parity issues.
 
 ---
 
