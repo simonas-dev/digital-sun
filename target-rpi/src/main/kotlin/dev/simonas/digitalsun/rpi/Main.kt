@@ -3,12 +3,10 @@ package dev.simonas.digitalsun.rpi
 import dev.simonas.digitalsun.core.PixelShader
 import dev.simonas.digitalsun.core.ShaderParameters
 import dev.simonas.digitalsun.core.Stages
-import dev.simonas.digitalsun.core.shaders.NamedShader
-import dev.simonas.digitalsun.core.shaders.ShaderFactory
+import dev.simonas.digitalsun.core.NamedShader
+import dev.simonas.digitalsun.core.ShaderFactory
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicReference
-import kotlin.system.exitProcess
-import kotlin.system.measureNanoTime
 import java.util.concurrent.LinkedBlockingQueue
 
 fun main() {
@@ -80,13 +78,11 @@ fun start() {
     val initialShader = shaders.firstOrNull { it.name == initialShaderName } ?: shaders.first()
     val currentShader = AtomicReference<PixelShader>(initialShader.shader)
     val currentShaderName = AtomicReference(initialShader.name)
-    val params = ShaderParameters()
 
     println("Using shader: ${currentShader.get().javaClass.simpleName}")
     printShaderMenu(shaders, currentShaderName.get())
 
     println("Starting animation loop (Ctrl+C to stop)...")
-    println("Parameters: seed=${params.seed}, spatialScale=${params.spatialScale}, timeScale=${params.timeScale}")
 
     val startTime = System.currentTimeMillis()
 
@@ -153,7 +149,7 @@ fun start() {
 
                 pixels.forEachIndexed { index, pixel ->
                     if (index < ledCount) {
-                        val colorValue = shader.shade(pixel.x, pixel.y, t, params)
+                        val colorValue = shader.shade(pixel.x, pixel.y, t)
                         val r = (colorValue.r * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
                         val g = (colorValue.g * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
                         val b = (colorValue.b * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()

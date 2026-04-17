@@ -9,8 +9,7 @@ interface PixelShader {
      * @param x X coordinate
      * @param y Y coordinate
      * @param t Time in seconds
-     * @param params Shader parameters
      * @return Color value for the pixel
      */
-    fun shade(x: Int, y: Int, t: Double, params: ShaderParameters): ColorValue
+    fun shade(x: Int, y: Int, t: Double): ColorValue
 }

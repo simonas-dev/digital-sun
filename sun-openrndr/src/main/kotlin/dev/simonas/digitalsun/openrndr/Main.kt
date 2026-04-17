@@ -1,7 +1,7 @@
 package dev.simonas.digitalsun.openrndr
 
 import dev.simonas.digitalsun.core.Stages
-import dev.simonas.digitalsun.core.shaders.ShaderFactory
+import dev.simonas.digitalsun.core.ShaderFactory
 import org.openrndr.KeyEvent
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
