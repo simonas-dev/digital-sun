@@ -24,8 +24,7 @@ Write firmware that makes the light behave exactly as the artist intends — rel
 sun-core/         — pure Kotlin, platform-agnostic
   PixelShader.kt  — interface: shade(x, y, t, params) → ColorValue
   Stage.kt        — pixel layout (fix: 500 → 604)
-  WarmColorShaderAlgorithm.kt  — primary shader
-  V1RedShaderAlgorithm.kt      — secondary shader
+  WarmColorShaderAlgorithm.kt  — primary (and only) shader
   ShaderParameters.kt          — serializable config
 
 target-rpi/       — JVM + JNA → rpi_ws281x

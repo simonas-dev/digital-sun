@@ -70,7 +70,7 @@ sudo java -jar target-rpi/build/libs/target-rpi-1.0.0.jar
 
 This will:
 - Initialize the LED strip with the Stage pixel layout
-- Run the V1RedShaderAlgorithm with Perlin noise
+- Run the WarmColorShaderAlgorithm with Perlin noise
 - Animate the LEDs at ~60 FPS
 - Display FPS stats every 100 frames
 
@@ -92,8 +92,8 @@ fun main() {
 
         // Or use the shader for animation
         val noiseGenerator = RpiNoiseGenerator()
-        val shader = V1RedShaderAlgorithm(noiseGenerator)
         val params = ShaderParameters()
+        val shader = WarmColorShaderAlgorithm(noiseGenerator, params)
         val stage = Stage()
 
         while (true) {
