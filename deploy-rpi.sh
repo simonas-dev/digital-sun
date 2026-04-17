@@ -62,6 +62,6 @@ if [ ! -z "$HW" ]; then
     ENV_ARGS="$ENV_ARGS HW=$HW"
 fi
 
-# Run interactively — stdin is forwarded as a pipe so shader switching works.
+# Allocate a TTY (-t) so Mosaic can take over the terminal for the TUI.
 # Ctrl+C sends SIGINT to ssh, which kills the remote process.
-ssh "$RPI_USER@$RPI_HOST" "cd $RPI_DIR && $ENV_ARGS ./run.sh"
+ssh -t "$RPI_USER@$RPI_HOST" "cd $RPI_DIR && $ENV_ARGS ./run.sh"

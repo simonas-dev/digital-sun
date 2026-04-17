@@ -16,8 +16,10 @@ import kotlin.math.pow
  */
 class WarmColorShaderAlgorithm(
     private val noiseGenerator: NoiseGenerator,
-    private val getParams: () -> ShaderParameters =  { ShaderParameters() },
+    private val getParams: () -> ShaderParameters,
 ) : PixelShader {
+
+
 
     override fun shade(x: Int, y: Int, t: Double): ColorValue {
         val params = getParams()
@@ -134,7 +136,11 @@ class WarmColorShaderAlgorithm(
     companion object {
         fun all(noiseGenerator: NoiseGenerator): List<NamedShader> {
             val variations = listOf(
-                // Default warm
+                // Warm classic — narrow red-orange band as it was at 2025-11-18
+                "warm_classic" to ShaderParameters(
+                    hueRange = HueRange(min = 360.0 / 360.0, max = 35.0 / 360.0),
+                ),
+                // Warm — wider magenta-yellow
                 "warm" to ShaderParameters(),
                 // Inferno — full range, aggressive FBM ★ FAVORITE
                 "inferno" to ShaderParameters(

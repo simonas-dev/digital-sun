@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.compose)
     application
 }
 
@@ -18,6 +19,8 @@ dependencies {
 
     // JNA for native library access
     implementation("net.java.dev.jna:jna:5.14.0")
+
+    implementation(libs.mosaic.runtime)
 }
 
 java {
