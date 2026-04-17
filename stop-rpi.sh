@@ -3,6 +3,11 @@
 
 set -e
 
+# Load .env if present
+if [[ -f "$(dirname "$0")/.env" ]]; then
+    set -a; source "$(dirname "$0")/.env"; set +a
+fi
+
 # Configuration
 RPI_HOST="${RPI_HOST:-192.168.0.165}"
 RPI_USER="${RPI_USER:-root}"

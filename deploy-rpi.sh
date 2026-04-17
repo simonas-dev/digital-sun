@@ -3,6 +3,11 @@
 
 set -e
 
+# Load .env if present
+if [[ -f "$(dirname "$0")/.env" ]]; then
+    set -a; source "$(dirname "$0")/.env"; set +a
+fi
+
 # Configuration
 RPI_HOST="${RPI_HOST:-192.168.0.165}"
 RPI_USER="${RPI_USER:-root}"
@@ -30,7 +35,8 @@ echo ""
 
 # Deploy the JAR and scripts
 echo "Deploying JAR and scripts to Raspberry Pi..."
-scp target-rpi/build/libs/target-rpi-1.0.0.jar \
+rsync -az --rsync-path="mkdir -p $RPI_DIR && rsync" \
+    target-rpi/build/libs/target-rpi-1.0.0.jar \
     target-rpi/run.sh \
     target-rpi/run-simple.sh \
     "$RPI_USER@$RPI_HOST:$RPI_DIR/"

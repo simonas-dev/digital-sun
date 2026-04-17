@@ -67,6 +67,12 @@ if [[ "$DISK" == "/dev/disk0" ]]; then
     exit 1
 fi
 
+if diskutil info "$DISK" | grep -q "Media Read-Only:.*Yes"; then
+    echo "Error: $DISK is hardware write-protected."
+    echo "Eject the card and flip the lock slider on the side of the SD card (or adapter) away from LOCK."
+    exit 1
+fi
+
 echo ""
 echo "*** WARNING: ALL DATA ON $DISK WILL BE ERASED ***"
 diskutil info "$DISK" | grep -E "Device / Media Name|Disk Size|Volume Name" || true
@@ -84,7 +90,7 @@ echo "Unmounting $DISK..."
 diskutil unmountDisk "$DISK"
 
 echo "Flashing to $RDISK (this takes a few minutes)..."
-dd if="$IMG_FILE" of="$RDISK" bs=4m status=progress
+sudo dd if="$IMG_FILE" of="$RDISK" bs=4m status=progress
 
 echo "Flushing..."
 sync
@@ -111,19 +117,33 @@ else
 
             sed -i '' "s|^aWIFI_SSID\[0\]=.*|aWIFI_SSID[0]='${WIFI_SSID}'|" "$WIFI_CONF"
             sed -i '' "s|^aWIFI_KEY\[0\]=.*|aWIFI_KEY[0]='${WIFI_PASS}'|" "$WIFI_CONF"
-            sed -i '' "s|^aWIFI_COUNTRY_CODE=.*|aWIFI_COUNTRY_CODE=LT|" "$WIFI_CONF"
 
-            # Enable WiFi in dietpi.txt
+            # Enable WiFi and set country code in dietpi.txt
             DIETPI_CONF="$BOOT_MOUNT/dietpi.txt"
             if [[ -f "$DIETPI_CONF" ]]; then
                 sed -i '' "s|^AUTO_SETUP_NET_WIFI_ENABLED=.*|AUTO_SETUP_NET_WIFI_ENABLED=1|" "$DIETPI_CONF"
-                echo "WiFi enabled in dietpi.txt"
+                sed -i '' "s|^AUTO_SETUP_NET_WIFI_COUNTRY_CODE=.*|AUTO_SETUP_NET_WIFI_COUNTRY_CODE=LT|" "$DIETPI_CONF"
+                sed -i '' "s|^AUTO_SETUP_AUTOMATED=.*|AUTO_SETUP_AUTOMATED=1|" "$DIETPI_CONF"
+                sed -i '' "s|^AUTO_SETUP_HEADLESS=.*|AUTO_SETUP_HEADLESS=1|" "$DIETPI_CONF"
+                echo "WiFi + headless automated setup enabled in dietpi.txt"
             fi
 
             echo "WiFi configured for SSID: $WIFI_SSID"
         fi
     else
         echo "Warning: dietpi-wifi.txt not found on boot partition."
+    fi
+
+    # --- Zero 2W WiFi fix ---
+    CONFIG_TXT="$BOOT_MOUNT/config.txt"
+    if [[ -f "$CONFIG_TXT" ]]; then
+        # enable_uart=1 forces core_freq=250 which breaks onboard WiFi on Zero 2W
+        sed -i '' "s|^enable_uart=1|# enable_uart=1|" "$CONFIG_TXT"
+        # Free up WiFi/BT chip so WiFi works reliably
+        if ! grep -q "dtoverlay=disable-bt" "$CONFIG_TXT"; then
+            echo "dtoverlay=disable-bt" >> "$CONFIG_TXT"
+        fi
+        echo "Applied Zero 2W WiFi fix in config.txt"
     fi
 fi
 
