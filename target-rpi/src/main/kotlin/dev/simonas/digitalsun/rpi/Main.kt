@@ -1,9 +1,8 @@
 package dev.simonas.digitalsun.rpi
 
-import dev.simonas.digitalsun.core.NamedShader
-import dev.simonas.digitalsun.core.PixelShader
 import dev.simonas.digitalsun.core.ShaderFactory
 import dev.simonas.digitalsun.core.Stages
+import dev.simonas.digitalsun.core.shaders.WarmColorShaderAlgorithm
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicReference
 import java.util.concurrent.LinkedBlockingQueue
@@ -55,14 +54,17 @@ fun start() {
     })
 
     val noiseGenerator = RpiNoiseGenerator()
-    val shaders = ShaderFactory.all(noiseGenerator)
+    val presets = ShaderFactory.allPresets()
 
-    val initialShaderName = System.getenv("SHADER")?.lowercase() ?: "warm_classic"
-    val initialShader = shaders.firstOrNull { it.name == initialShaderName } ?: shaders.first()
-    val currentShader = AtomicReference<PixelShader>(initialShader.shader)
-    val currentShaderName = AtomicReference(initialShader.name)
+    val initialPresetName = System.getenv("SHADER")?.lowercase() ?: "warm_classic"
+    val initialPreset = presets.firstOrNull { it.name == initialPresetName } ?: presets.first()
+    val currentParams = AtomicReference(initialPreset.params)
+    val currentPresetName = AtomicReference(initialPreset.name)
     val shaderFpsRef = AtomicReference(0.0)
     val renderFpsRef = AtomicReference(0.0)
+
+    // Single shader instance — TUI/web swap params, not the shader itself
+    val shader = WarmColorShaderAlgorithm(noiseGenerator) { currentParams.get() }
 
     val startTime = System.currentTimeMillis()
 
@@ -79,7 +81,6 @@ fun start() {
         while (isActive) {
             val buf = freeBuffer.poll() ?: continue
             val t = (System.currentTimeMillis() - startTime) / 1000.0
-            val shader = currentShader.get()
 
             pixels.forEachIndexed { index, pixel ->
                 if (index < ledCount) {
@@ -124,5 +125,5 @@ fun start() {
     }
 
     // TUI takes over the terminal until 'q' or signal
-    runTui(shaders, currentShader, currentShaderName, shaderFpsRef, renderFpsRef)
+    runTui(presets, currentParams, currentPresetName, shaderFpsRef, renderFpsRef)
 }

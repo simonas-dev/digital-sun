@@ -2,13 +2,11 @@ package dev.simonas.digitalsun.core
 
 import dev.simonas.digitalsun.core.shaders.WarmColorShaderAlgorithm
 
-data class NamedShader(
+data class ShaderPreset(
     val name: String,
-    val shader: PixelShader,
+    val params: ShaderParameters,
 )
 
 object ShaderFactory {
-    fun all(noiseGenerator: NoiseGenerator): List<NamedShader> = buildList {
-        addAll(WarmColorShaderAlgorithm.all(noiseGenerator))
-    }
+    fun allPresets(): List<ShaderPreset> = WarmColorShaderAlgorithm.allPresets()
 }

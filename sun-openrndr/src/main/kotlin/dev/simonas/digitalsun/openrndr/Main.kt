@@ -1,7 +1,11 @@
 package dev.simonas.digitalsun.openrndr
 
-import dev.simonas.digitalsun.core.Stages
+import dev.simonas.digitalsun.core.ColorValue
 import dev.simonas.digitalsun.core.ShaderFactory
+import dev.simonas.digitalsun.core.ShaderParameters
+import dev.simonas.digitalsun.core.ShaderPreset
+import dev.simonas.digitalsun.core.Stages
+import dev.simonas.digitalsun.core.shaders.WarmColorShaderAlgorithm
 import org.openrndr.KeyEvent
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
@@ -27,12 +31,15 @@ fun main() = application {
         val drawOffsetY = ((height - stageHeight) / 2 / P_SIZE).toInt() - pixels.minOf { it.y }
 
         val noiseGenerator = OpenrndrNoiseGenerator()
-        val shaders = ShaderFactory.all(noiseGenerator)
+        val presets = ShaderFactory.allPresets()
 
-        val shaderSelector = ShaderSelector(shaders.map { it.name })
+        val shaderSelector = ShaderSelector(presets.map { it.name })
         val params = Parameters()
         var activeIndex = shaderSelector.selectedIndex
-        val shader = OpenrndrPixelShader(shaders[activeIndex].shader)
+        params.applyPreset(presets[activeIndex])
+
+        // Single shader instance — preset selection writes into `params`
+        val shader = WarmColorShaderAlgorithm(noiseGenerator) { params.toShaderParameters() }
 
         val gui = GUI()
         gui.add(shaderSelector, "Shader")
@@ -43,14 +50,14 @@ fun main() = application {
         keyboard.keyDown.listen { event: KeyEvent ->
             when (event.name) {
                 "n" -> {
-                    shaderSelector.selectedIndex = (shaderSelector.selectedIndex + 1) % shaders.size
+                    shaderSelector.selectedIndex = (shaderSelector.selectedIndex + 1) % presets.size
                 }
                 "p" -> {
-                    shaderSelector.selectedIndex = (shaderSelector.selectedIndex - 1 + shaders.size) % shaders.size
+                    shaderSelector.selectedIndex = (shaderSelector.selectedIndex - 1 + presets.size) % presets.size
                 }
                 else -> {
                     val index = event.name.toIntOrNull()?.minus(1)
-                    if (index != null && index in shaders.indices) {
+                    if (index != null && index in presets.indices) {
                         shaderSelector.selectedIndex = index
                     }
                 }
@@ -75,16 +82,16 @@ fun main() = application {
         val blurred = colorBuffer(width, height)
 
         extend {
-            // Swap shader if selection changed
+            // Apply preset to GUI params if selection changed
             if (shaderSelector.selectedIndex != activeIndex) {
                 activeIndex = shaderSelector.selectedIndex
-                shader.coreShader = shaders[activeIndex].shader
+                params.applyPreset(presets[activeIndex])
             }
 
             offscreen.clearColor(0, ColorRGBa.BLACK)
             drawer.isolatedWithTarget(offscreen) {
                 pixels.forEach { pixel ->
-                    val color = shader.shade(pixel.x, pixel.y, seconds, params)
+                    val color = shader.shade(pixel.x, pixel.y, seconds).toOpenrndrColor()
                     drawer.drawPixel(pixel.x + drawOffsetX, pixel.y + drawOffsetY, color)
                 }
             }
@@ -92,8 +99,8 @@ fun main() = application {
             drawer.image(blurred)
 
             drawer.fill = ColorRGBa.WHITE
-            val shaderLabels = shaders.mapIndexed { i, s -> "${i + 1}:${s.name}" }.joinToString("  ")
-            drawer.text("[${shaders[activeIndex].name}]  $shaderLabels", 300.0, height - 60.0)
+            val shaderLabels = presets.mapIndexed { i, p -> "${i + 1}:${p.name}" }.joinToString("  ")
+            drawer.text("[${presets[activeIndex].name}]  $shaderLabels", 300.0, height - 60.0)
             drawer.text("Time: %.2f".format(seconds), 300.0, height - 40.0)
             drawer.text("FPS: %.1f".format(frameCount / seconds), 300.0, height - 20.0)
         }
@@ -106,4 +113,20 @@ private const val P_MARGIN = P_SIZE * 0.05
 private fun Drawer.drawPixel(x: Int, y: Int, color: ColorRGBa) {
     fill = color
     rectangle(x * P_SIZE, y * P_SIZE, P_SIZE - P_MARGIN, P_SIZE - P_MARGIN)
+}
+
+private fun ColorValue.toOpenrndrColor(): ColorRGBa = ColorRGBa(r, g, b, a)
+
+private fun Parameters.applyPreset(preset: ShaderPreset) {
+    val p = preset.params
+    seed = p.seed
+    spatialScale = p.spatialScale
+    timeScale = p.timeScale
+    noiseType = p.noiseType
+    alphaPower = p.alphaPower
+    alphaMin = p.alphaMin
+    alphaMax = p.alphaMax
+    fbmOctaves = p.fbmOctaves
+    fbmLacunarity = p.fbmLacunarity
+    fbmGain = p.fbmGain
 }

@@ -3,11 +3,11 @@ package dev.simonas.digitalsun.core.shaders
 import dev.simonas.digitalsun.core.ColorValue
 import dev.simonas.digitalsun.core.HSVColor
 import dev.simonas.digitalsun.core.HueRange
-import dev.simonas.digitalsun.core.NamedShader
 import dev.simonas.digitalsun.core.NoiseGenerator
 import dev.simonas.digitalsun.core.NoiseType
 import dev.simonas.digitalsun.core.PixelShader
 import dev.simonas.digitalsun.core.ShaderParameters
+import dev.simonas.digitalsun.core.ShaderPreset
 import kotlin.math.pow
 
 /**
@@ -134,7 +134,7 @@ class WarmColorShaderAlgorithm(
     }
 
     companion object {
-        fun all(noiseGenerator: NoiseGenerator): List<NamedShader> {
+        fun allPresets(): List<ShaderPreset> {
             val variations = listOf(
                 // Warm classic — narrow red-orange band as it was at 2025-11-18
                 "warm_classic" to ShaderParameters(
@@ -272,15 +272,7 @@ class WarmColorShaderAlgorithm(
                 ),
             )
 
-            return variations.map { (name, p) ->
-                NamedShader(
-                    name = name,
-                    shader = WarmColorShaderAlgorithm(
-                        noiseGenerator = noiseGenerator,
-                        getParams = { p }
-                    ),
-                )
-            }
+            return variations.map { (name, p) -> ShaderPreset(name, p) }
         }
     }
 }
