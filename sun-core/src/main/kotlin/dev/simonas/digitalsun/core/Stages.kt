@@ -6,22 +6,8 @@ object Stages {
     private const val verticalOffset = 6
     private const val centerX = 30 + 26
 
+    // 37.5 cm
     val V1 = createStage {
-        // 30 pixels
-        addRow(y = 0 * verticalMargin + verticalOffset, fromX = centerX - 15, toX = centerX + 15)
-        // 54 pixels
-        addRow(y = 1 * verticalMargin + verticalOffset, fromX = centerX - 27, toX = centerX + 27)
-        // 62 pixels
-        addRow(y = 2 * verticalMargin + verticalOffset, fromX = centerX - 31, toX = centerX + 31)
-        // 62 pixels
-        addRow(y = 3 * verticalMargin + verticalOffset, fromX = centerX - 31, toX = centerX + 31)
-        // 54 pixels
-        addRow(y = 4 * verticalMargin + verticalOffset, fromX = centerX - 27, toX = centerX + 27)
-        // 30 pixels
-        addRow(y = 5 * verticalMargin + verticalOffset, fromX = centerX - 15, toX = centerX + 15)
-    }
-
-    val V2 = createStage {
         // 24 pixels
         addRow(y = 0 * verticalMargin + verticalOffset, fromX = centerX - 12, toX = centerX + 12)
         // 42 pixels
@@ -36,6 +22,23 @@ object Stages {
         addRow(y = 5 * verticalMargin + verticalOffset, fromX = centerX - 12, toX = centerX + 12)
     }
 
+    // 50 cm
+    val V2 = createStage {
+        // 30 pixels
+        addRow(y = 0 * verticalMargin + verticalOffset, fromX = centerX - 15, toX = centerX + 15)
+        // 54 pixels
+        addRow(y = 1 * verticalMargin + verticalOffset, fromX = centerX - 27, toX = centerX + 27)
+        // 62 pixels
+        addRow(y = 2 * verticalMargin + verticalOffset, fromX = centerX - 31, toX = centerX + 31)
+        // 62 pixels
+        addRow(y = 3 * verticalMargin + verticalOffset, fromX = centerX - 31, toX = centerX + 31)
+        // 54 pixels
+        addRow(y = 4 * verticalMargin + verticalOffset, fromX = centerX - 27, toX = centerX + 27)
+        // 30 pixels
+        addRow(y = 5 * verticalMargin + verticalOffset, fromX = centerX - 15, toX = centerX + 15)
+    }
+
+    // 23 cm
     val V3 = createStage {
         val v3VerticalMargin = 2
         // 14 pixels
