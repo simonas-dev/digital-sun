@@ -9,6 +9,7 @@ import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.system.exitProcess
 import kotlin.system.measureNanoTime
+import java.util.concurrent.LinkedBlockingQueue
 
 fun main() {
     try {
@@ -90,7 +91,13 @@ fun start() {
     val startTime = System.currentTimeMillis()
 
     runBlocking {
-        val sharedLeds = createArrayOfSize(ledCount, Color(0.toUByte(), 0.toUByte(), 0.toUByte()))
+        val emptyFrame = { Array(ledCount) { Color(0.toUByte(), 0.toUByte(), 0.toUByte()) } }
+
+        // Double buffer: shader writes into a free buffer, hands it to render via the queue.
+        // Render returns the consumed buffer back so shader can reuse it (avoids allocation).
+        val readyFrame = LinkedBlockingQueue<Array<Color>>(1)
+        val freeBuffer = LinkedBlockingQueue<Array<Color>>(1)
+        freeBuffer.put(emptyFrame())
 
         // FPS tracking for shader coroutine
         var shaderFrameCount = 0L
@@ -137,56 +144,48 @@ fun start() {
             }
         }
 
-        // Shader coroutine - calculates pixel colors
+        // Shader coroutine - calculates pixel colors into a free buffer, then hands it to render
         animationScope.launch {
             while (isActive) {
+                val buf = freeBuffer.poll() ?: continue  // skip if render hasn't returned a buffer yet
                 val t = (System.currentTimeMillis() - startTime) / 1000.0
                 val shader = currentShader.get()
 
-                // Shade each pixel using the core shader algorithm
                 pixels.forEachIndexed { index, pixel ->
                     if (index < ledCount) {
                         val colorValue = shader.shade(pixel.x, pixel.y, t, params)
-
-                        // Convert ColorValue (0.0-1.0) to Color (0-255)
                         val r = (colorValue.r * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
                         val g = (colorValue.g * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
                         val b = (colorValue.b * colorValue.a * 255).toInt().coerceIn(0, 255).toUByte()
-
-                        sharedLeds[index] = Color(r, g, b)
+                        buf[index] = Color(r, g, b)
                     }
                 }
 
-                shaderFrameCount++
+                readyFrame.put(buf)  // hand completed frame to render
 
-                // Report shader FPS on 1000 frames
-                if (shaderFrameCount == 1000L) {
+                shaderFrameCount++
+                if (shaderFrameCount % 1000L == 0L) {
                     val now = System.currentTimeMillis()
                     val elapsed = (now - shaderLastReport) / 1000.0
-                    val fps = 1000.0 / elapsed
-                    println("[Shader] FPS: %.1f, Frame: %d".format(fps, shaderFrameCount))
+                    println("[Shader] FPS: %.1f, Frame: %d".format(1000.0 / elapsed, shaderFrameCount))
                     shaderLastReport = now
                 }
-                delay(2)
             }
         }
 
-        // Render coroutine - updates LED strip
+        // Render coroutine - blocks until shader has a complete frame ready, then sends to LEDs
         animationScope.launch {
             while (isActive) {
-                sharedLeds.forEachIndexed { index, pixel ->
-                    ledStrip[index] = pixel
-                }
+                val buf = readyFrame.poll(100, java.util.concurrent.TimeUnit.MILLISECONDS) ?: continue
+                buf.forEachIndexed { index, pixel -> ledStrip[index] = pixel }
                 ledStrip.show()
+                freeBuffer.put(buf)  // return buffer to shader
 
                 renderFrameCount++
-
-                // Report render FPS on 1000 frames
-                if (renderFrameCount == 1000L) {
+                if (renderFrameCount % 1000L == 0L) {
                     val now = System.currentTimeMillis()
                     val elapsed = (now - renderLastReport) / 1000.0
-                    val fps = 1000.0 / elapsed
-                    println("[Render] FPS: %.1f, Frame: %d".format(fps, renderFrameCount))
+                    println("[Render] FPS: %.1f, Frame: %d".format(1000.0 / elapsed, renderFrameCount))
                     renderLastReport = now
                 }
             }
